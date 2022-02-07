@@ -1,0 +1,19 @@
+reg_aladin.exe -ref D:\MRES\Label\Catch016\20201130.nii -flo D:\MRES\Label\Catch016\PCT.nii -res D:\MRES\Label\Catch016\T20201130.nii -aff D:\MRES\Label\Catch016\txt\20201130.txt -rigOnly -ln 4 -lp 3 -%%v 100 -%%i 60 
+reg_resample.exe  -ref  D:\MRES\Label\Catch016\20201130.nii -flo D:\MRES\Label\Catch016\Label.nii -res D:\MRES\Label\Catch016\R20201130.nii -inter 0 -trans D:\MRES\Label\Catch016\txt\20201130.txt 
+reg_aladin.exe -ref D:\MRES\Label\Catch016\20201201.nii -flo D:\MRES\Label\Catch016\PCT.nii -res D:\MRES\Label\Catch016\T20201201.nii -aff D:\MRES\Label\Catch016\txt\20201201.txt -rigOnly -ln 4 -lp 3 -%%v 100 -%%i 60 
+reg_resample.exe  -ref  D:\MRES\Label\Catch016\20201201.nii -flo D:\MRES\Label\Catch016\Label.nii -res D:\MRES\Label\Catch016\R20201201.nii -inter 0 -trans D:\MRES\Label\Catch016\txt\20201201.txt 
+reg_aladin.exe -ref D:\MRES\Label\Catch016\20201202.nii -flo D:\MRES\Label\Catch016\PCT.nii -res D:\MRES\Label\Catch016\T20201202.nii -aff D:\MRES\Label\Catch016\txt\20201202.txt -rigOnly -ln 4 -lp 3 -%%v 100 -%%i 60 
+reg_resample.exe  -ref  D:\MRES\Label\Catch016\20201202.nii -flo D:\MRES\Label\Catch016\Label.nii -res D:\MRES\Label\Catch016\R20201202.nii -inter 0 -trans D:\MRES\Label\Catch016\txt\20201202.txt 
+reg_aladin.exe -ref D:\MRES\Label\Catch016\20201204.nii -flo D:\MRES\Label\Catch016\PCT.nii -res D:\MRES\Label\Catch016\T20201204.nii -aff D:\MRES\Label\Catch016\txt\20201204.txt -rigOnly -ln 4 -lp 3 -%%v 100 -%%i 60 
+reg_resample.exe  -ref  D:\MRES\Label\Catch016\20201204.nii -flo D:\MRES\Label\Catch016\Label.nii -res D:\MRES\Label\Catch016\R20201204.nii -inter 0 -trans D:\MRES\Label\Catch016\txt\20201204.txt 
+reg_aladin.exe -ref D:\MRES\Label\Catch016\20201207.nii -flo D:\MRES\Label\Catch016\PCT.nii -res D:\MRES\Label\Catch016\T20201207.nii -aff D:\MRES\Label\Catch016\txt\20201207.txt -rigOnly -ln 4 -lp 3 -%%v 100 -%%i 60 
+reg_resample.exe  -ref  D:\MRES\Label\Catch016\20201207.nii -flo D:\MRES\Label\Catch016\Label.nii -res D:\MRES\Label\Catch016\R20201207.nii -inter 0 -trans D:\MRES\Label\Catch016\txt\20201207.txt 
+reg_aladin.exe -ref D:\MRES\Label\Catch016\20201208.nii -flo D:\MRES\Label\Catch016\PCT.nii -res D:\MRES\Label\Catch016\T20201208.nii -aff D:\MRES\Label\Catch016\txt\20201208.txt -rigOnly -ln 4 -lp 3 -%%v 100 -%%i 60 
+reg_resample.exe  -ref  D:\MRES\Label\Catch016\20201208.nii -flo D:\MRES\Label\Catch016\Label.nii -res D:\MRES\Label\Catch016\R20201208.nii -inter 0 -trans D:\MRES\Label\Catch016\txt\20201208.txt 
+reg_aladin.exe -ref D:\MRES\Label\Catch016\20201214.nii -flo D:\MRES\Label\Catch016\PCT.nii -res D:\MRES\Label\Catch016\T20201214.nii -aff D:\MRES\Label\Catch016\txt\20201214.txt -rigOnly -ln 4 -lp 3 -%%v 100 -%%i 60 
+reg_resample.exe  -ref  D:\MRES\Label\Catch016\20201214.nii -flo D:\MRES\Label\Catch016\Label.nii -res D:\MRES\Label\Catch016\R20201214.nii -inter 0 -trans D:\MRES\Label\Catch016\txt\20201214.txt 
+reg_aladin.exe -ref D:\MRES\Label\Catch016\20201220.nii -flo D:\MRES\Label\Catch016\PCT.nii -res D:\MRES\Label\Catch016\T20201220.nii -aff D:\MRES\Label\Catch016\txt\20201220.txt -rigOnly -ln 4 -lp 3 -%%v 100 -%%i 60 
+reg_resample.exe  -ref  D:\MRES\Label\Catch016\20201220.nii -flo D:\MRES\Label\Catch016\Label.nii -res D:\MRES\Label\Catch016\R20201220.nii -inter 0 -trans D:\MRES\Label\Catch016\txt\20201220.txt 
+reg_aladin.exe -ref D:\MRES\Label\Catch016\20201228.nii -flo D:\MRES\Label\Catch016\PCT.nii -res D:\MRES\Label\Catch016\T20201228.nii -aff D:\MRES\Label\Catch016\txt\20201228.txt -rigOnly -ln 4 -lp 3 -%%v 100 -%%i 60 
+reg_resample.exe  -ref  D:\MRES\Label\Catch016\20201228.nii -flo D:\MRES\Label\Catch016\Label.nii -res D:\MRES\Label\Catch016\R20201228.nii -inter 0 -trans D:\MRES\Label\Catch016\txt\20201228.txt 
+pause

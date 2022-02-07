@@ -1,0 +1,9 @@
+reg_aladin.exe -ref D:\MRES\Label\Catch_col_010\20190930.nii -flo D:\MRES\Label\Catch_col_010\PCT.nii -res D:\MRES\Label\Catch_col_010\T20190930.nii -aff D:\MRES\Label\Catch_col_010\txt\20190930.txt -rigOnly -ln 4 -lp 3 -%%v 100 -%%i 60 
+reg_resample.exe  -ref  D:\MRES\Label\Catch_col_010\20190930.nii -flo D:\MRES\Label\Catch_col_010\Label.nii -res D:\MRES\Label\Catch_col_010\R20190930.nii -inter 0 -trans D:\MRES\Label\Catch_col_010\txt\20190930.txt 
+reg_aladin.exe -ref D:\MRES\Label\Catch_col_010\20191002.nii -flo D:\MRES\Label\Catch_col_010\PCT.nii -res D:\MRES\Label\Catch_col_010\T20191002.nii -aff D:\MRES\Label\Catch_col_010\txt\20191002.txt -rigOnly -ln 4 -lp 3 -%%v 100 -%%i 60 
+reg_resample.exe  -ref  D:\MRES\Label\Catch_col_010\20191002.nii -flo D:\MRES\Label\Catch_col_010\Label.nii -res D:\MRES\Label\Catch_col_010\R20191002.nii -inter 0 -trans D:\MRES\Label\Catch_col_010\txt\20191002.txt 
+reg_aladin.exe -ref D:\MRES\Label\Catch_col_010\20191004.nii -flo D:\MRES\Label\Catch_col_010\PCT.nii -res D:\MRES\Label\Catch_col_010\T20191004.nii -aff D:\MRES\Label\Catch_col_010\txt\20191004.txt -rigOnly -ln 4 -lp 3 -%%v 100 -%%i 60 
+reg_resample.exe  -ref  D:\MRES\Label\Catch_col_010\20191004.nii -flo D:\MRES\Label\Catch_col_010\Label.nii -res D:\MRES\Label\Catch_col_010\R20191004.nii -inter 0 -trans D:\MRES\Label\Catch_col_010\txt\20191004.txt 
+reg_aladin.exe -ref D:\MRES\Label\Catch_col_010\20191008.nii -flo D:\MRES\Label\Catch_col_010\PCT.nii -res D:\MRES\Label\Catch_col_010\T20191008.nii -aff D:\MRES\Label\Catch_col_010\txt\20191008.txt -rigOnly -ln 4 -lp 3 -%%v 100 -%%i 60 
+reg_resample.exe  -ref  D:\MRES\Label\Catch_col_010\20191008.nii -flo D:\MRES\Label\Catch_col_010\Label.nii -res D:\MRES\Label\Catch_col_010\R20191008.nii -inter 0 -trans D:\MRES\Label\Catch_col_010\txt\20191008.txt 
+pause
