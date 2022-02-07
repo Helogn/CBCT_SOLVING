@@ -1,0 +1,11 @@
+reg_aladin.exe -flo D:\MRES\Label\Catch013\CBCT_TO_PCT\C20200921.nii -ref D:\MRES\Label\Catch013\CBCT_TO_PCT\PLabel.nii  -aff D:\MRES\Label\Catch013\txt\C20200921.txt -rigOnly -ln 4 -lp 3 -%%v 100 -%%i 60 
+reg_resample.exe  -flo  D:\MRES\Label\Catch013\20200921.nii -ref D:\MRES\Label\Catch013\PCT.nii -res D:\MRES\Label\Catch013\C\C20200921.nii -inter 0 -trans D:\MRES\Label\Catch013\txt\C20200921.txt 
+reg_aladin.exe -flo D:\MRES\Label\Catch013\CBCT_TO_PCT\C20200922.nii -ref D:\MRES\Label\Catch013\CBCT_TO_PCT\PLabel.nii  -aff D:\MRES\Label\Catch013\txt\C20200922.txt -rigOnly -ln 4 -lp 3 -%%v 100 -%%i 60 
+reg_resample.exe  -flo  D:\MRES\Label\Catch013\20200922.nii -ref D:\MRES\Label\Catch013\PCT.nii -res D:\MRES\Label\Catch013\C\C20200922.nii -inter 0 -trans D:\MRES\Label\Catch013\txt\C20200922.txt 
+reg_aladin.exe -flo D:\MRES\Label\Catch013\CBCT_TO_PCT\C20200923.nii -ref D:\MRES\Label\Catch013\CBCT_TO_PCT\PLabel.nii  -aff D:\MRES\Label\Catch013\txt\C20200923.txt -rigOnly -ln 4 -lp 3 -%%v 100 -%%i 60 
+reg_resample.exe  -flo  D:\MRES\Label\Catch013\20200923.nii -ref D:\MRES\Label\Catch013\PCT.nii -res D:\MRES\Label\Catch013\C\C20200923.nii -inter 0 -trans D:\MRES\Label\Catch013\txt\C20200923.txt 
+reg_aladin.exe -flo D:\MRES\Label\Catch013\CBCT_TO_PCT\C20200924.nii -ref D:\MRES\Label\Catch013\CBCT_TO_PCT\PLabel.nii  -aff D:\MRES\Label\Catch013\txt\C20200924.txt -rigOnly -ln 4 -lp 3 -%%v 100 -%%i 60 
+reg_resample.exe  -flo  D:\MRES\Label\Catch013\20200924.nii -ref D:\MRES\Label\Catch013\PCT.nii -res D:\MRES\Label\Catch013\C\C20200924.nii -inter 0 -trans D:\MRES\Label\Catch013\txt\C20200924.txt 
+reg_aladin.exe -flo D:\MRES\Label\Catch013\CBCT_TO_PCT\C20200925.nii -ref D:\MRES\Label\Catch013\CBCT_TO_PCT\PLabel.nii  -aff D:\MRES\Label\Catch013\txt\C20200925.txt -rigOnly -ln 4 -lp 3 -%%v 100 -%%i 60 
+reg_resample.exe  -flo  D:\MRES\Label\Catch013\20200925.nii -ref D:\MRES\Label\Catch013\PCT.nii -res D:\MRES\Label\Catch013\C\C20200925.nii -inter 0 -trans D:\MRES\Label\Catch013\txt\C20200925.txt 
+pause

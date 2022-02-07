@@ -1,12 +1,40 @@
-import pydicom as py
+import SimpleITK as sitk
+import os
+# from Register_code_CBCT_TO_CT import A
+def threshold(image_path,im_path,A):
+    data = sitk.ReadImage(image_path)
+    image1 = sitk.GetArrayFromImage(data)
+    image1[image1 < A] = 0
+    image1[image1 > A] = 1
+    image1[image1 == A] = 1
 
-# path ="D:\\MRES\\DATASETS\\CATCH_0001\contour.dcm"
-# # get the contour file for this patient
-# # a = get_contour_file(path)
+    origin =  data.GetOrigin()
+    spacing = data.GetSpacing()
+    direction = data.GetDirection()
 
-# data = py.read_file(path)
-# contour = data.dir("contour")
-# ctrs = data.ROIContourSequence
+    image2 = sitk.GetImageFromArray(image1)
+    image2.SetOrigin(origin)
+    image2.SetSpacing(spacing)
+    image2.SetDirection(direction)
 
-# print('hh')
-print("\\")
+    sitk.WriteImage(image2,im_path)
+
+
+# for i in range (16,23):
+i = 21
+Path = 'D:\MRES\Label\Catch0%s\\' % i
+# image = '20200527.nii'
+
+if os.path.exists( Path + "CBCT_TO_PCT" ) == False:
+    os.mkdir( Path + "CBCT_TO_PCT" )
+
+
+for x in os.listdir(Path):
+    if os.path.exists(Path + x.split('.')[0] + '.nii'):
+        if (x[0] in ['B','L','R','t','T','P','b','C','c']) == 0 :
+            threshold(Path + x, Path + 'CBCT_TO_PCT\\C' + x ,150)
+    if x.split('.')[0] == 'PCT':
+            threshold(Path + x, Path + 'CBCT_TO_PCT\\PLabel.nii' ,150)
+
+
+

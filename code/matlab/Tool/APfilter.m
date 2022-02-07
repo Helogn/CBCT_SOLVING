@@ -2,7 +2,7 @@ function output = APfilter(image,A,sigma)
 hsize = [A,1];
 h = fspecial('gaussian',hsize,sigma) ;
 kernal = zeros(A,A,A);
-if mod(A,2)
+if mod(A,2) == 0
     B = A/2;
 else
 %奇数
