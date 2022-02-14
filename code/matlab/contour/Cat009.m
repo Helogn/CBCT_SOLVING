@@ -85,39 +85,14 @@ imagesc(image(:,:,70))
 title('image')
 
 %%
-% figure(1)
-% subplot(2,2,1)
-% imagesc(squeeze(rtMask1(:,200,:)))
-% subplot(2,2,2)
-% imagesc(squeeze(image(:,200,:)))
-% xlabel("x")
-% title('image')
-% subplot(2,2,3)
-% imagesc(rtMask1(:,:,70))
-% subplot(2,2,4)
-% imagesc(image(:,:,70))
-% title('image')
-
-%%
 B = int16(rtMask1);
-
 Contour_path = 'D:\MRES\Label\Catch009\PCT.nii';
 data = load_untouch_nii(Contour_path);
 
 %%
+
 B = int16(rtMask1);
 data.img = B;
 save_untouch_nii(data,'D:\MRES\Label\Catch009\RLabel.nii')
 % niftiwrite(B,'D:\MRES\Label\Catch009\original\Label.nii',PLAN_info,'Version','NIfTI2');
 
-
-%%
-
-% clc
-% clear all
-% hh = 'PCT.nii';
-% PLAN_nii = "D:\MRES\DATASETS\CATCH_0009\" + hh;
-% PLAN_info = niftiinfo(PLAN_nii);
-% image = niftiread(PLAN_nii);
-% % delete "D:\MRES\Label\Catch009\" + hh;
-% niftiwrite(image,"D:\MRES\Label\Catch009\" + hh,PLAN_info);

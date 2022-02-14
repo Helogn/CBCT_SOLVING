@@ -3,7 +3,7 @@
 %%
 clear all
 Data_path = "D:\MRES\Label\Catch018\C\C";
-Label = niftiread("D:\MRES\Label\Catch018\Label");
+Label = niftiread("D:\MRES\Label\Catch018\RLabel");
 Scan1_path = '20201026.nii';
 Scan2_path = '20201027.nii';
 Scan3_path = '20201029.nii';
@@ -47,4 +47,7 @@ end
 plot(Sum)
 title('Catch018')
 %%
+list = dir(['D:\MRES\Label\Catch018\C\*.nii']);
+
+N = list(i).name;
 

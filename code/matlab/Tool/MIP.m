@@ -1,7 +1,8 @@
 % He Jiang
 function output = MIP(input_image, label_image,t)
-input_image(label_image==0) = -1000;
-input_image(input_image==0) = -1000;
+
+% input_image(label_image==0) = -1000;
+% input_image(input_image==0) = -1000;
 sz = size(input_image);
 mx = max(label_image,[],'all');
 mn = min(label_image,[],'all');
