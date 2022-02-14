@@ -21,8 +21,8 @@ def threshold(image_path,im_path,A):
 
 
 # for i in range (16,23):
-i = 21
-Path = 'D:\MRES\Label\Catch0%s\\' % i
+i = 6
+Path = 'D:\MRES\Label\Catch00%s\\' % i
 # image = '20200527.nii'
 
 if os.path.exists( Path + "CBCT_TO_PCT" ) == False:

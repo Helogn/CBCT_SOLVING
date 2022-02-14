@@ -1,12 +1,12 @@
 import os
 
 # for i in range (16,23):
-i = 6
+i = 10
 Catch_num = '00' + str(i)
 # Catch_num = "007"
 # Slice = ['20200406','20200413','20200420','20200501']
 
-Path = "D:\MRES\Label\Catch%s\\" % (Catch_num)
+Path = "D:\MRES\Label\Catch_col_%s\\" % (Catch_num)
 A = 1
 # ---reg_aladin
 if os.path.exists( Path + "txt" ) == False:
@@ -31,17 +31,17 @@ def find_cur(string, path):
 Slice = find_cur('nii',Path)
 
 
-with open("Catch" + str(Catch_num)+'.bat', 'w') as f:
+with open("Col_Catch" + str(Catch_num)+'.bat', 'w') as f:
 
     for k in (Slice):
         print(k)
         # if k != 'PCT' and k != 'Label' and k != 'PLabel' and k!= 'bone_label':
         if A == 1:
             
-            aladin = "reg_aladin.exe -flo D:\\MRES\\Label\\Catch%s\\CBCT_TO_PCT\\C%s.nii -ref D:\\MRES\\Label\\Catch%s\\CBCT_TO_PCT\\PLabel.nii  -aff D:\MRES\Label\Catch%s\\txt\\C%s.txt -rigOnly -ln 4 -lp 3 -%%%%v 100 -%%%%i 60 \n" % (Catch_num,k,Catch_num,Catch_num,k)
+            aladin = "reg_aladin.exe -flo D:\\MRES\\Label\\Catch_col_%s\\CBCT_TO_PCT\\C%s.nii -ref D:\\MRES\\Label\\Catch_col_%s\\CBCT_TO_PCT\\PLabel.nii  -aff D:\MRES\Label\Catch_col_%s\\txt\\C%s.txt -rigOnly -ln 4 -lp 3 -%%%%v 100 -%%%%i 60 \n" % (Catch_num,k,Catch_num,Catch_num,k)
             # aladin = "reg_aladin.exe -ref D:\\MRES\\Label\\Catch%s\\%s.nii -flo D:\MRES\Label\Catch%s\PCT.nii -res D:\MRES\Label\Catch%s\T%s.nii -aff D:\MRES\Label\Catch%s\\txt\\%s.txt -rigOnly -ln 4 -lp 3 -%%v 100 -%%i 60 \n" % (Catch_num,k,Catch_num,Catch_num,k,Catch_num,k)
             f.write(aladin)
-            resample = "reg_resample.exe  -flo  D:\\MRES\\Label\\Catch%s\\%s.nii -ref D:\\MRES\\Label\\Catch%s\\PCT.nii -res D:\\MRES\\Label\\Catch%s\\C\\C%s.nii -inter 0 -trans D:\MRES\Label\Catch%s\\txt\\C%s.txt \n" % ( Catch_num,k,Catch_num,Catch_num,k,Catch_num,k)
+            resample = "reg_resample.exe  -flo  D:\\MRES\\Label\\Catch_col_%s\\%s.nii -ref D:\\MRES\\Label\\Catch_col_%s\\PCT.nii -res D:\\MRES\\Label\\Catch_col_%s\\C\\C%s.nii -inter 0 -trans D:\MRES\Label\Catch_col_%s\\txt\\C%s.txt \n" % ( Catch_num,k,Catch_num,Catch_num,k,Catch_num,k)
             f.write(resample)
 
     f.write("pause")

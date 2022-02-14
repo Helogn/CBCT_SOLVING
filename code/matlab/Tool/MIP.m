@@ -21,8 +21,8 @@ matrix(Mask1 == 1) = input_image(Mask1 == 1);
 % input_image(label_image == mx) = -1000;
 
 
-output = squeeze(max(matrix,[],2));
-% output = squeeze(sum(matrix,2));
+% output = squeeze(max(matrix,[],2));
+output = squeeze(sum(matrix,2));
 
 
 end
