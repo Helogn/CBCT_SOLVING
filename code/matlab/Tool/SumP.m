@@ -1,8 +1,12 @@
 function out = SumP(input,label)
-    input(label == 0) = 0;
-    input(input == -1000) = 0;
+
+% calculate percentage
+    mx = max(label,[],'all');
+    input(label ~= mx) = 0;
+    input(input < -980) = 0;
     Sum1 = sum(input,'all');
-    label(input == -1000) = 0;
+    label(label < mx) = 0;
+    label = label /mx;
     Sum2 = sum(label,'all');
     out = Sum1/Sum2;
 

@@ -1,7 +1,7 @@
 import os
 
 # for i in range (16,23):
-i = 6
+i = 1
 Catch_num = '00' + str(i)
 # Catch_num = "007"
 # Slice = ['20200406','20200413','20200420','20200501']
@@ -21,7 +21,7 @@ def find_cur(string, path):
     for x in os.listdir(path):
         # print(x.split('.')[0])
         if os.path.exists(path + x.split('.')[0] + '.nii'):
-            if (x[0] in ['B','L','R','t','T','P']) == 0 :
+            if (x[0] in ['c','B','L','R','t','T','P']) == 0 :
                 if x.split('.')[1] == string:
                     
                     l.append (x.split('.')[0])
@@ -49,3 +49,16 @@ with open("Catch" + str(Catch_num)+'.bat', 'w') as f:
 #reg_aladin.exe -ref D:\MRES\Label\Catch011\20200626.nii -flo D:\MRES\Label\Catch011\PCT.nii -res D:\MRES\Label\Catch011\T20200626.nii -aff D:\MRES\Label\Catch011\txt\20200626.txt -rigOnly -ln 4 -lp 3 -%v 100 -%i 60
 #reg_resample.exe  -ref  D:\MRES\Label\Catch011\20200626.nii -flo D:\MRES\Label\Catch011\Label.nii -res D:\MRES\Label\Catch011\R20200626.nii -inter 0 -trans D:\MRES\Label\Catch011\txt\20200626.txt
 
+# 使用原CBCT配准
+# with open("Catch" + str(Catch_num)+'.bat', 'w') as f:
+
+#     for k in (Slice):
+#         print(k)
+#         # if k != 'PCT' and k != 'Label' and k != 'PLabel' and k!= 'bone_label':
+#         if A == 1:
+            
+#             aladin = "reg_aladin.exe -flo D:\\MRES\\Label\\Catch%s\\%s.nii -ref D:\\MRES\\Label\\Catch%s\\PCT.nii  -res D:\MRES\Label\Catch%s\\CBCTTOCT\\%s.nii -rigOnly -ln 4 -lp 3 -%%%%v 100 -%%%%i 60 \n" % (Catch_num,k,Catch_num,Catch_num,k)
+#             # aladin = "reg_aladin.exe -ref D:\\MRES\\Label\\Catch%s\\%s.nii -flo D:\MRES\Label\Catch%s\PCT.nii -res D:\MRES\Label\Catch%s\T%s.nii -aff D:\MRES\Label\Catch%s\\txt\\%s.txt -rigOnly -ln 4 -lp 3 -%%v 100 -%%i 60 \n" % (Catch_num,k,Catch_num,Catch_num,k,Catch_num,k)
+#             f.write(aladin)
+
+#     f.write("pause")

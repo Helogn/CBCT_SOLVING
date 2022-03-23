@@ -1,8 +1,14 @@
 clear all
+clc
 
-for i = 10:21
+for i = 1:8
+    if i < 10
+        A = 'Catch_col_00';
+    else
+        A = 'Catch_col_0'
+    end
 
-    num = strcat('Catch0',num2str(i)); ;
+    num = strcat(A,num2str(i)); ;
     path = strcat('D:\MRES\Label\',num,'\C\');
     
     Label = niftiread(strcat('D:\MRES\Label\',num,'\RLabel.nii'));
@@ -10,8 +16,8 @@ for i = 10:21
 end
 %%
 figure(2)
-for i = 10:21
-    subplot(2,6,i-9)
+for i = 1:8
+    subplot(2,4,i)
     eval(['plot(Sum',num2str(i),')'])
     title(i)
     eval(['len = size(Sum',num2str(i),');'])
