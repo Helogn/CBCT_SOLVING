@@ -1,11 +1,11 @@
 clear all
 clc
 % read file from path
-Catch = 'Catch003';
+Catch = 'Catch009';
 Contour_Information_path = strcat('D:\MRES\Label\' , Catch , '\contour.dcm');
 PLAN_nii =strcat('D:\MRES\Label\', Catch, '\PCT.nii');
-% Aim_path = strcat('D:\MRES\Label\', Catch , '\RLabel.nii');
-Aim_path = strcat('D:\MRES\Label\', Catch , '\RPTV.nii');
+Aim_path = strcat('D:\MRES\Label\', Catch , '\PTV.nii');
+
 PLAN_info = niftiinfo(PLAN_nii);
 image = niftiread(PLAN_nii);
 
@@ -15,8 +15,8 @@ info = dicominfo(Contour_Information_path,"UseVRHeuristic",false);
 rtContours = dicomContours(info);  
 rtContours.ROIs
 %%
-contourIndex = 15; 
-plotContour(rtContours,contourIndex);
+% contourIndex = 16; 
+% plotContour(rtContours,contourIndex);
 
 
 %%
@@ -27,19 +27,10 @@ Y = [-PLAN_info.Transform.T(8)-PLAN_info.Transform.T(6)*sz(2),-PLAN_info.Transfo
 Z = [PLAN_info.Transform.T(12),PLAN_info.Transform.T(12)+PLAN_info.Transform.T(11)*sz(3)];
 
 referenceInfo = imref3d(PLAN_info.ImageSize,X,Y,Z);
-rtMask1 = createMask(rtContours, 8, referenceInfo);
-rtMask2 = createMask(rtContours,4, referenceInfo);
-rtMaskT = createMask(rtContours,15, referenceInfo);
-% % rtMask1 = createMask(rtContours, 10, referenceInfo);
-% rtMask2 = createMask(rtContours,16, referenceInfo);
-% rtMaskT = createMask(rtContours,4, referenceInfo);
-rtMask = rtMask1  - rtMaskT;
-% rtMask = rtMask1 + rtMask2 - rtMaskT;
-% rtMask = rtMaskT;
-rtMask(rtMask == -1) = 0;
+rtMask = createMask(rtContours, 18, referenceInfo);
 volshow(rtMask);
 
-%%
+
 close all
 sz = size(image);
 A = zeros(sz);
@@ -69,10 +60,14 @@ imagesc(image(:,:,70))
 title('image')
 
 
-%%
+
 % hhh = 'D:\MRES\Label\Catch001\PCT.nii';
 close all
 data = load_untouch_nii(PLAN_nii);
 B = int16(A);
 data.img = B;
 save_untouch_nii(data,Aim_path)
+
+clc
+
+finish = 1
