@@ -1,17 +1,19 @@
  %%
+ clc
 clear all
 % judge mip or sip
 % Judge = 2;
-Aim = [6,7,8,9,11,12,13,14,18,19,20,21];
+% Aim = [6,7,8,9,11,12,13,14,18,19,20,21];
 % Aim = [6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21];
-% Aim = [6];
+% Aim = [2,3,5,6,7,8,9,10];
+Aim = [11,12,13,14,15,16,17,18,19,20,21,22];
 sz1 = size(Aim);
 % smooth for label
-Time_of_smooth = 3;
+Time_of_smooth = 1;
 
 for N = 1:sz1(2)
     for Judge = 1:2
-        I = Aim(N)
+        I = Aim(N);
         if I < 10
             A = 'Catch00';
         else
@@ -19,9 +21,8 @@ for N = 1:sz1(2)
         end
         num = strcat(A,num2str(I));
         path = strcat('D:\MRES\Label\',num,'\C\');
+        Aim_path = strcat('D:\MRES\Label\',num,'\erosion');
     %     Label = niftiread(strcat('D:\MRES\Label\',num,'\RLabel.nii'));
-    
-    
     % -------------------------Jiang-------------------------
         Label = niftiread(strcat('D:\MRES\Label\',num,'\RLabel.nii'));
 %         sz = size(Label);
@@ -35,8 +36,6 @@ for N = 1:sz1(2)
 %         end
 %         Label = t;
 %         clear t
-    
-    
     %------------------------------------------------
         PCT = Input(strcat('D:\MRES\Label\',num,'\PCT.nii'),Label);
     
@@ -54,9 +53,8 @@ for N = 1:sz1(2)
         
         %     eval(['Scan',num2str(i),'=','APfilter(Input(strcat(path,list(i).name),Label),A,sigma);']);
         end
-    
-        % MIP
-    
+
+
         for i = 1:1:sz(1)
             eval(['MIP',num2str(i),'=','MIP(Scan',num2str(i),',Label,Time_of_smooth,Judge);']);
         end
@@ -70,7 +68,7 @@ for N = 1:sz1(2)
     
         % combine
         % MIP0 = PCT
-        MIP0 = MIP(PCT,Label,Time_of_smooth,Judge);
+        [MIP0,ero_img] = Out_erosion(PCT,Label,Time_of_smooth,Judge);
         Image1 = MIP0;
 %         eval(['Image2 = MIP',num2str(i+loop),');'])
         eval(['Image2 = MIP',num2str(floor((sz(1)+1)/2)-1),';']);
@@ -97,7 +95,6 @@ for N = 1:sz1(2)
             end
             daspect([1 3 1]);
             view([-90 90])
-            sss = 1
         
         else
 
@@ -127,10 +124,14 @@ for N = 1:sz1(2)
         if Judge == 1
             exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\MIP\TMIP',num,'.png'),'Resolution',300)
         elseif Judge ==2
-            exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\SIP\TSIP',num,'.png'),'Resolution',300)
+            exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\AIP\TAIP',num,'.png'),'Resolution',300)
         end
-            
+%             
         close all
+        data = load_untouch_nii(strcat('D:\MRES\Label\',num,'\PCT.nii'));
+        B = int16(ero_img);
+        data.img = B;
+        save_untouch_nii(data,Aim_path)
     end
 end
 %%
