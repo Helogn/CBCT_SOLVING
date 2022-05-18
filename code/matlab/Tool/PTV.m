@@ -1,7 +1,7 @@
 clear all
 clc
 % read file from path
-Catch = 'Catch009';
+Catch = 'Catch019';
 Contour_Information_path = strcat('D:\MRES\Label\' , Catch , '\contour.dcm');
 PLAN_nii =strcat('D:\MRES\Label\', Catch, '\PCT.nii');
 Aim_path = strcat('D:\MRES\Label\', Catch , '\PTV.nii');

@@ -4,14 +4,16 @@ clear all
 % Judge = 2;
 % Aim = [6,7,8,9,11,12,13,14,18,19,20,21];
 % Aim = [6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22];
-Aim = [11,12,13,14,15,16,17,18,19,20,21,22];
+% Aim = [11,12,13,14,15,16,17,18,19,20,21,22];
+Aim = [3];
 % Aim = [22];
 sz1 = size(Aim);
 % smooth for label
 Time_of_smooth = 1;
 
 for N = 1:sz1(2)
-    for Judge = 1:2
+% for N = 1:1
+    for Judge = 1:1
         I = Aim(N)
         if I < 10
             A = 'Catch00';
@@ -39,11 +41,14 @@ for N = 1:sz1(2)
         sz = size(list);
         A = 20;
         sigma = 10;
+%         sigma = 1;
     
         for i = 1 : sz(1)
             eval(['Scan',num2str(i),'=','Input(strcat(path,list(i).name),Label);']);
             eval(['B = Scan',num2str(i),';']);
+%             eval(['Scan',num2str(i),'= imgaussfilt3(Scan',num2str(i),',sigma);'])
             eval(['Scan',num2str(i),'= APfilter(Scan',num2str(i),',A,sigma);'])
+            
             eval(['Scan',num2str(i),'(B == -1000) = -1000;'])
             clear B
         end
@@ -84,6 +89,7 @@ for N = 1:sz1(2)
             figure()
             imagesc(Result)
             colormap('gray')
+            colorbar()
             if Judge == 1
         
                 title(strcat('MIP: ',num))
@@ -103,6 +109,7 @@ for N = 1:sz1(2)
             figure()
             imagesc(Image1)
             colormap('gray')
+            colorbar()
             if Judge == 1
         
                 title(strcat('MIP: ',num))
@@ -116,19 +123,19 @@ for N = 1:sz1(2)
 
         % ---------------------------------------------------------
         % ---------------- write image ----------------------------
-        f = gcf;
+%         f = gcf;
         % Requires R2020a or later
-        if Judge == 1
-            exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\MIP\TMIP',num,'.png'),'Resolution',300)
-        elseif Judge ==2
-            exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\AIP\TAIP',num,'.png'),'Resolution',300)
-        end
+%         if Judge == 1
+%             exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\MIP\TMIP',num,'.png'),'Resolution',300)
+%         elseif Judge ==2
+%             exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\AIP\TAIP',num,'.png'),'Resolution',300)
+%         end
             
-        close all
-        data = load_untouch_nii(strcat('D:\MRES\Label\',num,'\PCT.nii'));
-        B = int16(ero_img);
-        data.img = B;
-        save_untouch_nii(data,Aim_path)
+%         close all
+%         data = load_untouch_nii(strcat('D:\MRES\Label\',num,'\PCT.nii'));
+%         B = int16(ero_img);
+%         data.img = B;
+%         save_untouch_nii(data,Aim_path)
     end
 end
 

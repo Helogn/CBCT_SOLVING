@@ -2,8 +2,15 @@ clear all
 close all
 %%
 % calculate average changes among size
-
-ST = [6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22];
+ST = [3
+7
+9
+11
+15
+16
+19
+]';
+% ST = [6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22];
 % ST = 22;
 % ST = 18
 % ST = [6,8,15,16,10,17]
@@ -82,13 +89,13 @@ xlim([0.5,23])
 
 % confirmed positive date
 C3 = 5;
-C4 = 8;
+% C4 = 8;
 C7 = 3;
-C16 = 1:6;
-C18 = 8;
+% C16 = 1:6;
+% C18 = 8;
 C19 = 5:6;
 
-Ind = [7,16,18,19];
+Ind = [3,7,19];
 % Ind = 18
 sz2 = size(Ind);
 for j = 1 : sz2(2)
@@ -97,7 +104,8 @@ end
 
 title('average intensity for catch')
 xlabel('date')
-legend('C6','C7','C8','C9','C10','C11','C12','C13','C14','C15','C16','C17','C18','C19','C20','C21','C22')
+legend('3','7','9','11','15','16','19');
+% legend('C6','C7','C8','C9','C10','C11','C12','C13','C14','C15','C16','C17','C18','C19','C20','C21','C22')
 
 
 % --------------- suspect date ---------------------
@@ -106,13 +114,13 @@ S12 = 9;
 S13 = 3;
 S14 = 3;
 
-Ind = [11,12,13,14];
-% Ind = 18
-sz2 = size(Ind);
-for j = 1 : sz2(2)
-    eval(['scatter(S',num2str(Ind(j)),',Sum',num2str(Ind(j)),'(S',num2str(Ind(j)),'),"b")']);
-end
+% Ind = [11,12,13,14];
+% % Ind = 18
+% sz2 = size(Ind);
+% for j = 1 : sz2(2)
+%     eval(['scatter(S',num2str(Ind(j)),',Sum',num2str(Ind(j)),'(S',num2str(Ind(j)),'),"b")']);
+% end
 
-title('average intensity for catch')
-xlabel('date')
-legend('C6','C7','C8','C9','C10','C11','C12','C13','C14','C15','C16','C17','C18','C19','C20','C21','C22')
+% title('average intensity for catch')
+% xlabel('date')
+% legend('C6','C7','C8','C9','C10','C11','C12','C13','C14','C15','C16','C17','C18','C19','C20','C21','C22')
