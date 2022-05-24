@@ -1,9 +1,13 @@
 %test detect
+% calculate average intensity of image
 clc
 clear all
 close all
-
-Aim = [3,9,11,15,16,19];
+% 3,9,11,15,16,19
+% Aim = 1:12;
+Aim = [3];
+% Aim = [3,9,11,15,16,19];
+% Aim = [1,2,3,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22];
 sz1 = size(Aim);
 Time_of_smooth = 2;
 Numberofclass = 20;
@@ -18,6 +22,11 @@ for N = 1:sz1(2)
         else
             A = 'Catch0';
         end
+%         if I < 10
+%             A = 'Catch_col_00';
+%         else
+%             A = 'Catch_col_0';
+%         end
 
         % define path of file
         num = strcat(A,num2str(I));
@@ -28,22 +37,30 @@ for N = 1:sz1(2)
 
         list = dir([path +'*.nii']);
         sz_num_img = size(list);
-        extract = ones([sz_num_img(1)-1,size_of_img(1),size_of_img(2),size_of_img(3)]);
+        extract = ones([sz_num_img(1),size_of_img(1),size_of_img(2),size_of_img(3)]);
     
 
         % Img1 - Img2
-        for i = 1 : sz_num_img(1)-1
-            eval(['extract(',num2str(i),',:,:,:) = Input(strcat(path,list(i).name),Label) - Input(strcat(path,list(i+1).name),Label);'])
-%             eval(['B = extract(',num2str(i),',:,:,:);']);
-%             eval(['Scan',num2str(i),'(B == -1000) = -1000;'])
-%             clear B
+        SUM = zeros([size_of_img(1),size_of_img(2),size_of_img(3)]);
+        for i = 1 : sz_num_img(1)
+            B = double(Input(strcat(path,list(i).name),Label));
+            SUM = SUM + B;
+            clear B
+        end
+
+        SUM = SUM / sz_num_img(1);
+
+        for i = 1 : sz_num_img(1)
+
+            eval(['extract(',num2str(i),',:,:,:) = Input(strcat(path,list(i).name),Label) - SUM;'])
+
         end
 
         sz = size(extract);
 
 
         % MIP
-        for i = 1:1:sz_num_img(1)-1
+        for i = 1:1:sz_num_img(1)
             eval(['MIP',num2str(i),'=','(MIP(squeeze(extract(',num2str(i),',:,:,:)),Label,Time_of_smooth,Judge));']);
         end
 
@@ -77,19 +94,9 @@ for N = 1:sz1(2)
             end
             
             Result = cat(2,Image2,Image1);
-            Result = classify(Result,Numberofclass);
-            figure()
-            imagesc(Result)
-            colormap('default')
-            colorbar()
-            if Judge == 1
-        
-                title(strcat('MIP: ',num))
-            elseif Judge == 2
-                title(strcat('AIP: ',num))
-            end
-            daspect([1 3 1]);
-            view([-90 90])
+            [Result,mi,mx] = classify(Result,Numberofclass);
+            plotimg(Result,Judge,mi,mx,num)
+
         
         else
             Image1 = MIP1;
@@ -99,30 +106,21 @@ for N = 1:sz1(2)
             end
 
             figure()
-            Image1 = classify(Image1,Numberofclass);
-            imagesc(Image1)
-%             caxis([0,1000])
-            colormap('default')
-            colorbar()
-            if Judge == 1
-        
-                title(strcat('MIP: ',num))
-            elseif Judge == 2
+            [Result,mi,mx] = classify(Image1,Numberofclass);
+            plotimg(Result,Judge,mi,mx,num)
 
-                title(strcat('SUBSIP: ',num))
-            end
-            daspect([1 3 1]);
-            view([-90 90])
         
         end
-        f = gcf;
+%         f = gcf;
     % Requires R2020a or later
-        if Judge == 1
-            exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\MIP\TMIP',num,'.png'),'Resolution',300)
-        elseif Judge ==2
-            exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\New\SubSIP',num,'.png'),'Resolution',300)
-        end
-        close all
+%         if Judge == 1
+%             exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\MIP\TMIP',num,'.png'),'Resolution',300)
+%         elseif Judge ==2
+%             exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\New\SubSIP',num,'.png'),'Resolution',300)
+% 
+% %             exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\New\Con_SubSIP',num,'.png'),'Resolution',300)
+%         end
+%         close all
 
 
 

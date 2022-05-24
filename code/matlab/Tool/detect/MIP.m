@@ -10,6 +10,9 @@ mn = min(label_image,[],'all');
 % ----------- erode
 Mask1 = zeros(sz(1),sz(2), sz(3));
 Mask1(label_image==mx) = 1;
+
+
+
 SE = strel('cube',3);
 if t > 0
     for i = 1 : t
@@ -27,7 +30,10 @@ if Judge == 1
     output = squeeze(max(matrix,[],2));
 elseif Judge == 2
     % SIP
-    output = squeeze(sum(matrix,2));
+    % calculate sum along each axis
+    output = squeeze(sum(matrix,2))./squeeze(sum(Mask1,2));
+%     output = squeeze(sum(matrix,2));
+
 end
 
 
