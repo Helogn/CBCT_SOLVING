@@ -1,4 +1,10 @@
 function output = APfilter(image,A,sigma)
+% This is a filter along AP direction
+% image : input img
+% A is size of filter kernel
+% sigma is the parameter of size
+
+
 hsize = [A,1];
 h = fspecial('gaussian',hsize,sigma) ;
 kernal = zeros(A,A,A);

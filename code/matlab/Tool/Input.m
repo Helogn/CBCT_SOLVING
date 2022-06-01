@@ -1,4 +1,5 @@
 function output = Input(input_image, label_image)
+% extract lung from original
 
     mx = max(label_image,[],'all');
     image = niftiread(input_image);

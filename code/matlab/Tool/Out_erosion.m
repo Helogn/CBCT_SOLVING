@@ -1,6 +1,10 @@
 % He Jiang
 % output erosion image
 function [output,label_image] = Out_erosion(input_image, label_image,t,Judge)
+% t: times of erosion
+
+
+
 
 % input_image(label_image==0) = -1000;
 % input_image(input_image==0) = -1000;

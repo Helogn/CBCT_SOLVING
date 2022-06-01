@@ -1,12 +1,12 @@
- %%
+ % Calculate MIP and AIP
 clear all
+close all
+clc
+
 % judge mip or sip；
 % Judge = 2;
-% Aim = [6,7,8,9,11,12,13,14,18,19,20,21];
-% Aim = [6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22];
-% Aim = [11,12,13,14,15,16,17,18,19,20,21,22];
+
 Aim = [16];
-% Aim = [22];
 sz1 = size(Aim);
 % smooth for label
 Time_of_smooth = 0;
@@ -33,7 +33,6 @@ for N = 1:sz1(2)
     % -------------------------Jiang-------------------------
         Label = niftiread(strcat('D:\MRES\Label\',num,'\RLabel.nii'));
     
-    
     %- ----------------------------------------------
         PCT = Input(strcat('D:\MRES\Label\',num,'\PCT.nii'),Label);
     
@@ -41,20 +40,16 @@ for N = 1:sz1(2)
         sz = size(list);
         A = 20;
         sigma = 10;
-%         sigma = 1;
     
         for i = 1 : sz(1)
             eval(['Scan',num2str(i),'=','Input(strcat(path,list(i).name),Label);']);
             eval(['B = Scan',num2str(i),';']);
 %             eval(['Scan',num2str(i),'= imgaussfilt3(Scan',num2str(i),',sigma);'])
             eval(['Scan',num2str(i),'= APfilter(Scan',num2str(i),',A,sigma);'])
-            
             eval(['Scan',num2str(i),'(B == -1000) = -1000;'])
             clear B
         end
-    
         % MIP
-    
         for i = 1:1:sz(1)
             eval(['MIP',num2str(i),'=','MIP(Scan',num2str(i),',Label,Time_of_smooth,Judge);']);
         end
