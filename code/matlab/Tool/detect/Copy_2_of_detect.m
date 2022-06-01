@@ -30,7 +30,7 @@ for N = 1:sz1(2)
 
         % define path of file
         num = strcat(A,num2str(I));
-        path = strcat('D:\MRES\Label\',num,'\C\');
+        path = strcat('D:\MRES\Label\',num,'\DEF\');
         Label = niftiread(strcat('D:\MRES\Label\',num,'\RLabel.nii'));
         size_of_img = size(Label);
         PCT = Input(strcat('D:\MRES\Label\',num,'\PCT.nii'),Label);

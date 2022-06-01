@@ -20,10 +20,11 @@ def threshold(image_path,im_path,A):
     sitk.WriteImage(image2,im_path)
 
 
-# for i in range (16,23):
-i = 12
-# Path = 'D:\MRES\Label\Catch00%s\\' % i
-Path = 'D:\MRES\Label\Catch_col_0%s\\' % i
+
+# for i in range (23,32):
+i = 32
+Path = 'D:\MRES\Label\Catch0%s\\' % i
+# Path = 'D:\MRES\Label\Catch_col_0%s\\' % i
 # image = '20200527.nii'
 
 if os.path.exists( Path + "CBCT_TO_PCT" ) == False:

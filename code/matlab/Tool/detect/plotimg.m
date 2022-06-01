@@ -11,7 +11,7 @@ elseif Judge == 2
 end
 daspect([1 3 1]);
 view([-90 90])
-colormap('bone')
+colormap('gray')
 colorbar('Ticks',[0,10,20],...
          'TickLabels',{'Cold','gray','Hot'})
 

@@ -1,8 +1,8 @@
 import os
 
 # for i in range (16,23):
-i = 1
-Catch_num = '00' + str(i)
+i = 32
+Catch_num = '0' + str(i)
 # Catch_num = "007"
 # Slice = ['20200406','20200413','20200420','20200501']
 

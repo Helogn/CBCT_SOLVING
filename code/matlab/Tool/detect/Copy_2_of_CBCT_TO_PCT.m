@@ -1,11 +1,13 @@
  %%
+
+ % normal MIP for image
 clear all
 % judge mip or sip；
 % Judge = 2;
 % Aim = [6,7,8,9,11,12,13,14,18,19,20,21];
 % Aim = [6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22];
 % Aim = [11,12,13,14,15,16,17,18,19,20,21,22];
-Aim = [16];
+Aim = [7];
 % Aim = [22];
 sz1 = size(Aim);
 % smooth for label
@@ -27,7 +29,7 @@ for N = 1:sz1(2)
 %         end
         num = strcat(A,num2str(I));
         path = strcat('D:\MRES\Label\',num,'\DEF\');
-        Aim_path = strcat('D:\MRES\Label\',num,'\erosion');
+%         Aim_path = strcat('D:\MRES\Label\',num,'\erosion');
 
     
     % -------------------------Jiang-------------------------
