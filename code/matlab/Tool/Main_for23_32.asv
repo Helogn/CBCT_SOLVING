@@ -2,10 +2,10 @@
 clear all; close all; clc
 %%
 
-Aim_Index = [28,30,31,32];
+Aim_Index = [23,24,28];
 sz_index = size(Aim_Index);
-Time_of_smooth = 0;
-Judge = 1;
+Time_of_smooth = 1;
+Judge = 2;
 % parameters of filter kernel
 Length_of_kernel = 20;
 sigma = 10;
@@ -26,7 +26,7 @@ for N = 1 : sz_index(2)
 %         end
 
     num = strcat(A,num2str(Aim_Index(N)));
-    CBCT_Path = strcat('D:\MRES\Label\',num,'\C\');
+    CBCT_Path = strcat('D:\MRES\Label\',num,'\DEF\');
 %     Aim_path = strcat('D:\MRES\Label\',num,'\erosion');
     Label = niftiread(strcat('D:\MRES\Label\',num,'\RLabel.nii'));
     PCT = Input(strcat('D:\MRES\Label\',num,'\PCT.nii'),Label);
@@ -37,6 +37,7 @@ for N = 1 : sz_index(2)
     for i = 1: sz_of_list(1)
         eval(['Scan',num2str(i),'=','Input(strcat(CBCT_Path,list(i).name),Label);']);
         eval(['B = Scan',num2str(i),';']);
+        eval(['sz = size(B)'])
         eval(['Scan',num2str(i),'= APfilter(Scan',num2str(i),',Length_of_kernel,sigma);'])
         eval(['Scan',num2str(i),'(B == -1000) = -1000;'])
         eval(['MIP',num2str(i),'=','MIP(Scan',num2str(i),',Label,Time_of_smooth,Judge);']);
@@ -51,16 +52,21 @@ for N = 1 : sz_index(2)
     if mod(sz_of_list(1),2) == 0
         % if number of CBCT is even
         loop = sz_of_list(1) / 2;
+        eval(['Image2 = MIP',num2str(loop+1),';']);
     else
         % if number of CBCT is odd
         loop = floor(sz_of_list(1)/2) + 1;
+        eval(['Image2 = MIP',num2str(loop+1),';']);
+        if judge == 2
+            eval(['MIP',num2str(loop*2),' = zeros([sz(1),sz(3)]) + MIP(1,1);']);
+        else 
+            
+        end
     end
-    [MIP0,ero_img] = Out_erosion(PCT,Label,Time_of_smooth,Judge);
     Image1 = MIP1;
-    eval(['Image2 = MIP',num2str(loop),';']);
     
     if sz_of_list(1) >= 6
-        for i = 1:1:loop - 1
+        for i = 2:1:loop
             eval(['Image1 = cat(1,Image1,','MIP',num2str(i),');'])
             eval(['Image2 = cat(1,Image2,','MIP',num2str(i+loop),');'])
         end
@@ -96,9 +102,9 @@ for N = 1 : sz_index(2)
 % ------------ save img -----------------------------------
     f = gcf;
     if Judge == 1
-        exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\MIP\TMIP',num,'.png'),'Resolution',300)
+        exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\DEF\TMIP',num,'.png'),'Resolution',300)
     elseif Judge ==2
-        exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\AIP\TAIP',num,'.png'),'Resolution',300)
+        exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\DEF\TAIP',num,'.png'),'Resolution',300)
     end
 
     close all

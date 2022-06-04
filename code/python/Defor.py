@@ -8,7 +8,7 @@ def find_cur(string, path):
     for x in os.listdir(path):
         # print(x.split('.')[0])
         if os.path.exists(path + x.split('.')[0] + '.nii'):
-            if (x[0] in ['c','B','L','R','t','T','P','e']) == 0 :
+            if (x[0] in ['c','B','L','R','t','T','P','e','C']) == 0 :
                 if x.split('.')[1] == string:
                     
                     l.append (x.split('.')[0])
@@ -16,7 +16,10 @@ def find_cur(string, path):
     return l
 
 # for i in range (16,23):
-T = [3,7,9,11,15,16,19]
+T = [19]
+a = 0
+if os.path.exists( "Catch_New.bat" ) == True:
+    os.remove("Catch_New.bat")
 for i in T:
     if i <10:
         Catch_num = '00' + str(i)
@@ -27,18 +30,25 @@ for i in T:
     # ---reg_aladin
     if os.path.exists( Path + "DEF" ) == False:
         os.mkdir( Path + "DEF" )
+    if os.path.exists( Path + "CPP" ) == False:
+        os.mkdir( Path + "CPP" )
 
     Slice = find_cur('nii',Path)
 
 
     # with open("Catch" + str(Catch_num)+'.bat', 'w') as f:
-    with open("Catch.bat", 'a') as f:
+
+    with open("Catch_New.bat", 'a') as f:
 
         for k in (Slice):
+            a = a + 1
             print(k)
             # if k != 'PCT' and k != 'Label' and k != 'PLabel' and k!= 'bone_label':
             if A == 1: 
-                Path = "reg_f3d -flo D:\MRES\Label\Catch%s\%s.nii -ref D:\MRES\Label\Catch%s\PCT.nii -aff D:\MRES\Label\Catch%s\\txt\C%s.txt  --lncc -5 -vel -cpp D:\MRES\Label\Catch%s\CPP%s.nii -res D:\MRES\Label\Catch%s\RES%s.nii.nii -sx -10\n" % (Catch_num,k,Catch_num,Catch_num,k,Catch_num,k,Catch_num,k)
+                Path = "reg_f3d -flo D:\MRES\Label\Catch%s\%s.nii -ref D:\MRES\Label\Catch%s\PCT.nii -aff D:\MRES\Label\Catch%s\\txt\C%s.txt  --lncc -5 -vel -cpp D:\MRES\Label\Catch%s\CPP\CPP%s.nii -res D:\MRES\Label\Catch%s\DEF\RES%s.nii -sx -10\n" % (Catch_num,k,Catch_num,Catch_num,k,Catch_num,k,Catch_num,k)
                 f.write(Path)
+
+
+print("final out put = ",a)
 
        

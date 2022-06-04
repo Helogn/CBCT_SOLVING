@@ -1,10 +1,10 @@
 clear all
 clc
 % read file from path
-Catch = 'Catch019';
+Catch = 'Catch023';
 Contour_Information_path = strcat('D:\MRES\Label\' , Catch , '\contour.dcm');
 PLAN_nii =strcat('D:\MRES\Label\', Catch, '\PCT.nii');
-Aim_path = strcat('D:\MRES\Label\', Catch , '\PTV.nii');
+Aim_path = strcat('D:\MRES\Label\', Catch , '\RLabel.nii');
 
 PLAN_info = niftiinfo(PLAN_nii);
 image = niftiread(PLAN_nii);

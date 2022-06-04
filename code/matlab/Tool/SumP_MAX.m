@@ -8,6 +8,5 @@ function out = SumP_MAX(input)
     Sum1 = sum(input,"all");
     Sum2 = sum(amount,"all");
     out = Sum1 /Sum2;
-    
 
 end

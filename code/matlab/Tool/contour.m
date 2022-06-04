@@ -1,11 +1,11 @@
 clear all
 clc
 % read file from path
-Catch = 'Catch003';
+Catch = 'Catch027';
 Contour_Information_path = strcat('D:\MRES\Label\' , Catch , '\contour.dcm');
 PLAN_nii =strcat('D:\MRES\Label\', Catch, '\PCT.nii');
 % Aim_path = strcat('D:\MRES\Label\', Catch , '\RLabel.nii');
-Aim_path = strcat('D:\MRES\Label\', Catch , '\PTV.nii');
+Aim_path = strcat('D:\MRES\Label\', Catch , '\RLabel.nii');
 PLAN_info = niftiinfo(PLAN_nii);
 image = niftiread(PLAN_nii);
 
@@ -27,14 +27,14 @@ Y = [-PLAN_info.Transform.T(8)-PLAN_info.Transform.T(6)*sz(2),-PLAN_info.Transfo
 Z = [PLAN_info.Transform.T(12),PLAN_info.Transform.T(12)+PLAN_info.Transform.T(11)*sz(3)];
 
 referenceInfo = imref3d(PLAN_info.ImageSize,X,Y,Z);
-rtMask1 = createMask(rtContours, 6, referenceInfo);
-rtMask2 = createMask(rtContours,7, referenceInfo);
-rtMaskT = createMask(rtContours,11, referenceInfo);
+rtMask1 = createMask(rtContours,12, referenceInfo);
+% rtMask2 = createMask(rtContours,17, referenceInfo);
+rtMaskT = createMask(rtContours,38, referenceInfo);
 % % rtMask1 = createMask(rtContours, 10, referenceInfo);
 % rtMask2 = createMask(rtContours,16, referenceInfo);
 % rtMaskT = createMask(rtContours,4, referenceInfo);
-rtMask = rtMask1  + rtMask2 - rtMaskT;
-% rtMask = rtMask1 + rtMask2 - rtMaskT;
+% rtMask = rtMask1  + rtMask2 - rtMaskT;
+rtMask = rtMask1  - rtMaskT;
 % rtMask = rtMaskT;
 rtMask(rtMask == -1) = 0;
 volshow(rtMask);
@@ -47,7 +47,7 @@ A = zeros(sz);
 for i = 1: sz(1)
     for j = 1:sz(2)
         for k = 1:sz(3)          
-            A(j,sz(1)+1-i,k) = rtMaskT(i,j,k);
+            A(j,sz(1)+1-i,k) = rtMask(i,j,k);
         end
     end
 end
@@ -76,3 +76,4 @@ data = load_untouch_nii(PLAN_nii);
 B = int16(A);
 data.img = B;
 save_untouch_nii(data,Aim_path)
+finish = 0
