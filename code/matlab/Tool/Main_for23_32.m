@@ -2,7 +2,7 @@
 clear all; close all; clc
 %%
 
-Aim_Index = [32];
+Aim_Index = [19];
 sz_index = size(Aim_Index);
 Time_of_smooth = 1;
 Judge = 1;
@@ -60,7 +60,7 @@ for N = 1 : sz_index(2)
         if Judge == 2
             eval(['MIP',num2str(loop*2),' = zeros([sz(1),sz(3)]) + MIP1(1,1);']);
         elseif Judge == 1
-            eval(['MIP',num2str(loop*2),' = zeros([sz(1),sz(3)]) -zeros([sz(1),sz(3)]);']);
+            eval(['MIP',num2str(loop*2),' = zeros([sz(1),sz(3)]) -1000;']);
         end
     end
     Image1 = MIP1;
