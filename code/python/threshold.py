@@ -1,5 +1,6 @@
 import SimpleITK as sitk
 import os
+import numpy as np
 # from Register_code_CBCT_TO_CT import A
 def threshold(image_path,im_path,A):
     data = sitk.ReadImage(image_path)
@@ -22,21 +23,24 @@ def threshold(image_path,im_path,A):
 
 
 # for i in range (23,32):
-i = 32
-Path = 'D:\MRES\Label\Catch0%s\\' % i
-# Path = 'D:\MRES\Label\Catch_col_0%s\\' % i
-# image = '20200527.nii'
+#I = [13]
+I = np.linspace(14,29,16,dtype = int)
+for i in I:
+    #/home/helognn/CBCT_SOLVING/code/python
+    Path = '/home/helognn/data/CATCH_CONTROL_00%s/' % i
+    # Path = 'D:\MRES\Label\Catch_col_0%s\\' % i
+    # image = '20200527.nii'
 
-if os.path.exists( Path + "CBCT_TO_PCT" ) == False:
-    os.mkdir( Path + "CBCT_TO_PCT" )
+    if os.path.exists( Path + "CBCT_TO_PCT" ) == False:
+        os.mkdir( Path + "CBCT_TO_PCT" )
 
 
-for x in os.listdir(Path):
-    if os.path.exists(Path + x.split('.')[0] + '.nii'):
-        if (x[0] in ['B','L','R','t','P','b','C','c','T']) == 0 :
-            threshold(Path + x, Path + 'CBCT_TO_PCT\\C' + x ,150)
-    if x.split('.')[0] == 'PCT':
-            threshold(Path + x, Path + 'CBCT_TO_PCT\\PLabel.nii' ,150)
-
+    for x in os.listdir(Path):
+        if os.path.exists(Path + x.split('.')[0] + '.nii'):
+            if (x[0] in ['B','L','R','t','P','b','C','c','T']) == 0 :
+                threshold(Path + x, Path + 'CBCT_TO_PCT/C' + x ,150)
+            if x.split('.')[0] == 'PCT':
+                threshold(Path + x, Path + 'CBCT_TO_PCT/PLabel.nii' ,150)
+    print("finish one case")
 
 
