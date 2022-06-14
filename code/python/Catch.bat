@@ -1,2 +1,0 @@
-reg_f3d -flo D:\MRES\Label\Catch019\20200521.nii -ref D:\MRES\Label\Catch019\PCT.nii -aff D:\MRES\Label\Catch019\txt\C20200521.txt  --lncc -5 -vel -cpp D:\MRES\Label\Catch019\CPP20200521.nii -res D:\MRES\Label\Catch019\RES20200521.nii.nii -sx -10
-reg_f3d -flo D:\MRES\Label\Catch019\20200528.nii -ref D:\MRES\Label\Catch019\PCT.nii -aff D:\MRES\Label\Catch019\txt\C20200528.txt  --lncc -5 -vel -cpp D:\MRES\Label\Catch019\CPP20200528.nii -res D:\MRES\Label\Catch019\RES20200528.nii.nii -sx -10
