@@ -1,17 +1,23 @@
-% test HU threshold for a single file
+% test HU threshold for multiply files
 % He Jiang 2022-6-5
-clear all; close all;clc
+clear all; clc % close all;
 
-CBCT_index = [11];
-% CBCT_index = [3,7,9,15,16];
+% CBCT_index = [3];
+CBCT_index = [3,7,9,11,15,16,19,23,24,25,26,28,29,30,31,32];
 sz_ind = size(CBCT_index);
-start = -700; aim = 0; increase = 50;
+start = -1000; aim = 0; increase = 50;
+cal = start : increase: aim;
+sz_cal = size(cal);
 % sz_index = size(CBCT_index);
 Time_of_smooth = 0;
 Judge = 1;
 % parameters of filter kernel
-Length_of_kernel = 20;
-sigma = 10;
+% Length_of_kernel = 20;
+% sigma = 10;
+
+% guassian parameters:
+filter_size = 5;
+gaussian_sigma = 0.8;
 
 %% Path Part
 figure()
@@ -37,23 +43,25 @@ for IND = 1 : sz_ind(2)
     Index_of_CBCT = 1;
     IMG = zeros([size_of_dir(1),size_of_label(1),size_of_label(2),size_of_label(3)]);
     Comp = zeros([size_of_dir(1),size_of_label(1),size_of_label(2),size_of_label(3)]);
-
+    arr_curve = zeros(size_of_dir(1),sz_cal(2));
     for Ind_of_CB = 1:size_of_dir(1)
-        
         ori = 0;
         curve_ind = 1;
         Ind_File = Dir(Ind_of_CB).name;
         Ind_FilE = reverse(Ind_File);
+
+        % 
         if Ind_FilE(9) ~= 'd'
             Path_CBCT = strcat(Path_CB,Ind_File);
 
             % load data
-            IMG(Index_of_CBCT,:,:,:) = niftiread(Path_CBCT);
+            
+            IMG(Index_of_CBCT,:,:,:) = imgaussfilt3(niftiread(Path_CBCT),gaussian_sigma,'FilterSize',filter_size);
             
             % extract infor from Label
             MID = squeeze(IMG(Index_of_CBCT,:,:,:));
             MID(Label == 0) = 0; 
-            for level = start +increase : increase : aim
+            for level = start : increase : aim
                 if ori == 0
                     Base = MIP(MID, Label,Time_of_smooth,Judge);
                     Base(Base <= -1000) = 0;
@@ -61,37 +69,42 @@ for IND = 1 : sz_ind(2)
                     Sum_base = sum(Base,'all');
                     ori = 1;
                 end
-
+%                 level
                 MID(MID<=level) = -1000;
                 Result = MIP(MID, Label,Time_of_smooth,Judge);
-                Result(Result <= -1000) = 0;
-%                 Result = Result + 1000;
-%                 if level == -500 
-%                     ou1 = Result;
-%                 end
-%                 if  level == -700
-%                     ou2 = Result;
-%                 end                
-                curve(curve_ind) =  1 - sum(Base - Result,'all')/Sum_base;
+                Result(Result <= level) = 0;
+              
+                arr_curve(Ind_of_CB,curve_ind) =  1 - sum(Base - Result,'all')/Sum_base;
                 curve_ind = curve_ind + 1;
             end
-            sz = size(curve);
-            figure(1)
-            plot((1:sz(2))*increase,curve,'DisplayName',strcat('Image:',num2str(CBCT_index(IND)),'--Num ',num2str(Ind_of_CB)))
-            hold on
-            legend
+
             Index_of_CBCT = Index_of_CBCT + 1;
         end
 
-    end
-    ylim([-0.1,1.1])
-%     title(num2str(ind))
-%     hold off
-end
 
+    end
+    mean_curve = mean(arr_curve,1);
+    sz = size(mean_curve);
+ 
+    plot(start + ((0:(sz(2)-1))*increase),mean_curve,'DisplayName',strcat('Image:',num2str(CBCT_index(IND))))
+    hold on
+    legend
+%     clear arr_curve mean_curve
+
+end
+ylim([-0.1,1.1])
 
 
 
 %%
-% figure()
-% imagesc(ou2)
+xlabel('Threshold Value (HU)')
+ylabel('Percentage: Result/Origin ')
+title('Threshold Curve')
+
+
+
+
+
+
+
+

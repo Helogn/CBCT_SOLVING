@@ -28,15 +28,15 @@ test_red = 0;
 
 % CBCT_index = [24,29];
 % CBCT_index = [30];
-CBCT_index = [23,24,25,26,30,31,32];
+% CBCT_index = [23,24,25,26,30,31,32];
 
-% CBCT_index = [3,7,9,11,15,16,19];
+CBCT_index = [3,7,9,11,15,16,19];
 sz_ind = size(CBCT_index);
 Value = -650;
 set_value = 0; % use < -650
 set_scatter = 1;
 % figure_title = strcat("23-32-Normal ",num2str(Value));
-figure_title = "Deformable-Mean-No-Threshold";
+figure_title = "Positive-Cases-No-Threshold ";
 filter_size = 5;
 gaussian_sigma = 0.5;
 
@@ -48,7 +48,7 @@ for IND = 1 : sz_ind(2)
     else
         Catch = strcat('00',num2str(ind));
     end
-    Path_CB = strcat("D:\MRES\Label\Catch",Catch,"\DEF\");
+    Path_CB = strcat("D:\MRES\Label\Catch",Catch,"\D\");
     
     % load PCT
     
@@ -139,5 +139,4 @@ if set_scatter == 1
 end
 title(figure_title)
 xlabel('Time Order')
-ylim([-900,-680])
 ylabel('Mean HU')

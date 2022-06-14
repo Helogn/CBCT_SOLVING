@@ -6,14 +6,14 @@ clc
 % judge mip or sip；
 % Judge = 2;
 
-Aim = [16];
+Aim = [36];
 sz1 = size(Aim);
 % smooth for label
 Time_of_smooth = 0;
 
 for N = 1:sz1(2)
 % for N = 1:1
-    for Judge = 1:1
+    for Judge = 1:2
         I = Aim(N)
         if I < 10
             A = 'Catch00';
@@ -118,15 +118,15 @@ for N = 1:sz1(2)
 
         % ---------------------------------------------------------
         % ---------------- write image ----------------------------
-%         f = gcf;
-        % Requires R2020a or later
-%         if Judge == 1
-%             exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\MIP\TMIP',num,'.png'),'Resolution',300)
-%         elseif Judge ==2
-%             exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\AIP\TAIP',num,'.png'),'Resolution',300)
-%         end
+        f = gcf;
+%         ?Requires R2020a or later
+        if Judge == 1
+            exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\MIP\TMIP',num,'.png'),'Resolution',300)
+        elseif Judge ==2
+            exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\AIP\TAIP',num,'.png'),'Resolution',300)
+        end
             
-%         close all
+        close all
 %         data = load_untouch_nii(strcat('D:\MRES\Label\',num,'\PCT.nii'));
 %         B = int16(ero_img);
 %         data.img = B;

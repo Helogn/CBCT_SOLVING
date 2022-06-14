@@ -1,7 +1,7 @@
 import os
 
 
-Catch_num = "009"
+Catch_num = "033"
 # Catch_num = "007"
 # Slice = ['20200406','20200413','20200420','20200501']
 
@@ -18,9 +18,10 @@ def find_cur(string, path):
     for x in os.listdir(path):
         # print(x.split('.')[0])
         if os.path.exists(path + x.split('.')[0] + '.nii'):
-            if x.split('.')[1] == string:
-                
-                l.append (x.split('.')[0])
+            if (x[0] in ['B','L','R','t','T','P']) == 0 :
+                if x.split('.')[1] == string:
+                    
+                    l.append (x.split('.')[0])
 
 
 
