@@ -27,8 +27,8 @@ test_red = 0;
 % -------------------------------------------------
 
 % CBCT_index = [24,29];
-% CBCT_index = [30];
-CBCT_index = [23,24,25,26,30,31,32];
+CBCT_index = [24];
+% CBCT_index = [23,24,25,26,30,31,32];
 
 % CBCT_index = [3,7,9,11,15,16,19];
 sz_ind = size(CBCT_index);

@@ -1,9 +1,11 @@
-% test HU threshold for multiply files
+% calculate number of voxels beyond each threshold
 % He Jiang 2022-6-5
-clear all; close all;clc
+clear all; clc % close all;
 
-% CBCT_index = [3];
-CBCT_index = [3,7,9,11,15,16,19,23,24,25,26,28,29,30,31,32];
+CBCT_index = [24];
+% CBCT_index = [23,24,25,26,28,29,30,31,32];
+% CBCT_index = [3,7,9,11,15,16,19,23,24,25,26,28,29,30,31,32];
+con = [3,7,9,11,15,16];
 sz_ind = size(CBCT_index);
 start = -1000; aim = 0; increase = 50;
 cal = start : increase: aim;
@@ -20,7 +22,7 @@ filter_size = 5;
 gaussian_sigma = 0.8;
 
 %% Path Part
-figure()
+% figure()
 for IND = 1 : sz_ind(2)
     ind = CBCT_index(IND);
     if ind >= 10
@@ -60,21 +62,40 @@ for IND = 1 : sz_ind(2)
             
             % extract infor from Label
             MID = squeeze(IMG(Index_of_CBCT,:,:,:));
-            MID(Label == 0) = 0; 
+            MID(Label == 0) = -3000; 
             for level = start : increase : aim
                 if ori == 0
-                    Base = MIP(MID, Label,Time_of_smooth,Judge);
-                    Base(Base <= -1000) = 0;
-%                     Base = Base  + 1000;
-                    Sum_base = sum(Base,'all');
+%                     Base = MIP(MID, Label,Time_of_smooth,Judge,-3000);
+%                     Base(Base <= -1000) = 0;
+%                     Sum_base = sum(Base,'all');
+                    Sum_base = sum((MID~=-3000),'all');
                     ori = 1;
+%                     size_base = size(Base);
+                    MIDD = MID;
                 end
 %                 level
-                MID(MID<=level) = -1000;
-                Result = MIP(MID, Label,Time_of_smooth,Judge);
-                Result(Result == -1000) = 0;
-              
-                arr_curve(Ind_of_CB,curve_ind) =  1 - sum(Base - Result,'all')/Sum_base;
+% ---------------------------- AVE INENSITY -------------------------------
+%                 MID(MID<=level) = -1000;
+%                 Result = MIP(MID, Label,Time_of_smooth,Judge);
+%                 Result(Result <= level) = 0;
+%               
+%                 arr_curve(Ind_of_CB,curve_ind) =  1 - sum(Base - Result,'all')/Sum_base;
+% --------------------------- END -----------------------------------------
+
+% ----------------------------Count Number of changed pixels --------------------------------
+                MIDD(MIDD<=level) = -3000;
+%                 Result = MIP(MIDD, Label,Time_of_smooth,Judge);
+%                 Result(Result <= level) = 0;
+                Jug_equal = sum((MIDD ~= -3000),'all')/Sum_base;
+                arr_curve(Ind_of_CB,curve_ind) = Jug_equal;
+
+
+
+% ----------------------------       END       ------------------------------------
+
+
+
+
                 curve_ind = curve_ind + 1;
             end
 
@@ -85,10 +106,17 @@ for IND = 1 : sz_ind(2)
     end
     mean_curve = mean(arr_curve,1);
     sz = size(mean_curve);
- 
-    plot(start + ((0:(sz(2)-1))*increase),mean_curve,'DisplayName',strcat('Image:',num2str(CBCT_index(IND))))
-    hold on
-    legend
+    jug_color = size(find(con == (CBCT_index(IND))));
+    if jug_color ~= 0  
+        plot(start + ((0:(sz(2)-1))*increase),mean_curve,'blue','DisplayName',strcat('Image:',num2str(CBCT_index(IND))))
+        hold on
+        legend
+    else
+        plot(start + ((0:(sz(2)-1))*increase),mean_curve,'black','DisplayName',strcat('Image:',num2str(CBCT_index(IND))))
+        hold on
+        legend
+    end
+
 %     clear arr_curve mean_curve
 
 end
@@ -97,17 +125,9 @@ ylim([-0.1,1.1])
 
 
 %%
-% figure()
-% imagesc(ou2)
-% plot((1:sz(2))*increase,mean_curve)
-% for i = 1 : sz_cal(2)
-%     str2{i} = [num2str(-1000  + i * increase)];
-% end-1000- increase + ((1:sz(2))*increase
-% xticklabels(str2)
-% set(haxes,'xtick',(0:1:sz_cal(2)),'xticklabel',str2)
-
-% -1000- increase + ((1:sz(2))*increase)
-
+xlabel('Threshold Value (HU)')
+ylabel('Percentage: Result/Origin ')
+title('Threshold Curve')
 
 
 

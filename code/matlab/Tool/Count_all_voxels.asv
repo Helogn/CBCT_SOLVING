@@ -1,12 +1,13 @@
-% test HU threshold for multiply files
+% calculate number of voxels beyond each threshold
 % He Jiang 2022-6-5
 clear all; clc % close all;
 
 % CBCT_index = [3];
-% CBCT_index = [3,7,9,11,15,16];
+% CBCT_index = [23,24,25,26,28,29,30,31,32];
 CBCT_index = [3,7,9,11,15,16,19,23,24,25,26,28,29,30,31,32];
+con = [3,7,9,11,15,16]p;
 sz_ind = size(CBCT_index);
-start = -1000; aim = 500; increase = 50;
+start = -1000; aim = 0; increase = 50;
 cal = start : increase: aim;
 sz_cal = size(cal);
 % sz_index = size(CBCT_index);
@@ -61,15 +62,15 @@ for IND = 1 : sz_ind(2)
             
             % extract infor from Label
             MID = squeeze(IMG(Index_of_CBCT,:,:,:));
-%             MID(Label == 0) = -3000; 
+            MID(Label == 0) = -3000; 
             for level = start : increase : aim
                 if ori == 0
-                    Base = MIP(MID, Label,Time_of_smooth,Judge,-3000);
+%                     Base = MIP(MID, Label,Time_of_smooth,Judge,-3000);
 %                     Base(Base <= -1000) = 0;
 %                     Sum_base = sum(Base,'all');
-                    Sum_base = sum((Base~=-3000),'all');
+                    Sum_base = sum((MID~=-3000),'all');
                     ori = 1;
-                    size_base = size(Base);
+%                     size_base = size(Base);
                     MIDD = MID;
                 end
 %                 level
@@ -82,10 +83,10 @@ for IND = 1 : sz_ind(2)
 % --------------------------- END -----------------------------------------
 
 % ----------------------------Count Number of changed pixels --------------------------------
-                MIDD(MIDD<=level) = -2000;
-                Result = MIP(MIDD, Label,Time_of_smooth,Judge);
+                MIDD(MIDD<=level) = -3000;
+%                 Result = MIP(MIDD, Label,Time_of_smooth,Judge);
 %                 Result(Result <= level) = 0;
-                Jug_equal = sum((Result == Base),'all')/Sum_base;
+                Jug_equal = sum((MIDD ~= -3000),'all')/Sum_base;
                 arr_curve(Ind_of_CB,curve_ind) = Jug_equal;
 
 

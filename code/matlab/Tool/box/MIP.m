@@ -1,5 +1,8 @@
 % He Jiang
-function output = MIP(input_image, label_image,t,Judge)
+function output = MIP(input_image, label_image,t,Judge,X)
+if (nargin<5)
+    X = -1000;
+end
 
 % input_image(label_image==0) = -1000;
 % input_image(input_image==0) = -1000;
@@ -17,7 +20,7 @@ if t > 0
     end
 end
 % -----------
-matrix = zeros(sz) -1000 ;
+matrix = zeros(sz) + X ;
 matrix(Mask1 == 1) = input_image(Mask1 == 1);
 
 % input_image(label_image == mx) = -1000;

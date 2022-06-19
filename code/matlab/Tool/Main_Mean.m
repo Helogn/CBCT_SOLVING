@@ -4,8 +4,8 @@ clear all; close all; clc
 figure()
 %%
 % CBCT_index = [3,7,9,11,15,16];
-CBCT_index = [28];
-% CBCT_index = [23,24,25,26,28,29,30,31,32];
+% CBCT_index = [28];
+CBCT_index = [23,24,25,26,28,29,30,31,32];
 sz_ind = size(CBCT_index);
 Value = -650;
 for IND = 1 : sz_ind(2)
@@ -55,8 +55,8 @@ for IND = 1 : sz_ind(2)
     AVE = mean(AVG_IMG);
     plot(AVG_IMG,'DisplayName',num2str(CBCT_index(IND)),'LineWidth',3)
     hold on
-    sz = size(AVG_IMG);
-    plot(1:sz(2),(ones(1,sz(2)))*AVE)
+%     sz = size(AVG_IMG);
+%     plot(1:sz(2),(ones(1,sz(2)))*AVE)
 
 %     title(num2str(CBCT_index(IND)))
 

@@ -1,7 +1,7 @@
 import os
 
 
-Catch_num = "033"
+Catch_num = "030"
 # Catch_num = "007"
 # Slice = ['20200406','20200413','20200420','20200501']
 
