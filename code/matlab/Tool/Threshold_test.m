@@ -2,10 +2,11 @@
 % He Jiang 2022-6-5
 clear all; close all;clc
 
-CBCT_index = [11];
+CBCT_index = [15];
+con = [2,5];
 % CBCT_index = [3,7,9,15,16];
 sz_ind = size(CBCT_index);
-start = -700; aim = 0; increase = 50;
+start = -1000; aim = 0; increase = 50;
 % sz_index = size(CBCT_index);
 Time_of_smooth = 0;
 Judge = 1;
@@ -52,34 +53,31 @@ for IND = 1 : sz_ind(2)
             
             % extract infor from Label
             MID = squeeze(IMG(Index_of_CBCT,:,:,:));
-            MID(Label == 0) = 0; 
+            MID(Label == 0) = -3000; 
             for level = start +increase : increase : aim
                 if ori == 0
-                    Base = MIP(MID, Label,Time_of_smooth,Judge);
-                    Base(Base <= -1000) = 0;
-%                     Base = Base  + 1000;
-                    Sum_base = sum(Base,'all');
+                    Sum_base = sum((MID~=-3000),'all');
                     ori = 1;
+                    MIDD = MID;
                 end
 
-                MID(MID<=level) = -1000;
-                Result = MIP(MID, Label,Time_of_smooth,Judge);
-                Result(Result <= -1000) = 0;
-%                 Result = Result + 1000;
-%                 if level == -500 
-%                     ou1 = Result;
-%                 end
-%                 if  level == -700
-%                     ou2 = Result;
-%                 end                
-                curve(curve_ind) =  1 - sum(Base - Result,'all')/Sum_base;
+                MIDD(MIDD<=level) = -3000;  
+                curve(curve_ind) =  sum((MIDD ~= -3000),'all')/Sum_base;
                 curve_ind = curve_ind + 1;
             end
             sz = size(curve);
             figure(1)
-            plot((1:sz(2))*increase,curve,'DisplayName',strcat('Image:',num2str(CBCT_index(IND)),'--Num ',num2str(Ind_of_CB)))
-            hold on
-            legend
+            jug_color = size(find(con == (Index_of_CBCT)));
+            if jug_color ~= 0  
+                % 有明显变化区域
+                plot((1:sz(2))*increase,curve,'blue','DisplayName',strcat('Image:',num2str(CBCT_index(IND)),'--Num ',num2str(Ind_of_CB)),'LineWidth',3)
+                hold on
+                legend
+            else
+                plot((1:sz(2))*increase,curve,'red','DisplayName',strcat('Image:',num2str(CBCT_index(IND)),'--Num ',num2str(Ind_of_CB)),'LineWidth',3)
+                hold on
+                legend
+            end
             Index_of_CBCT = Index_of_CBCT + 1;
         end
 

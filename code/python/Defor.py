@@ -16,7 +16,7 @@ def find_cur(string, path):
     return l
 
 # for i in range (16,23):
-T = [36]
+T = [20]
 a = 0
 if os.path.exists( "Catch_New.bat" ) == True:
     os.remove("Catch_New.bat")

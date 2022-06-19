@@ -2,7 +2,7 @@
 clear all; close all; clc
 %%
 
-Aim_Index = [28,30,31,32];
+Aim_Index = [3,7];
 sz_index = size(Aim_Index);
 Time_of_smooth = 0;
 Judge = 1;

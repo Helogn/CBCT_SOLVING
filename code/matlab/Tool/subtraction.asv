@@ -1,0 +1,17 @@
+% calculate subtraction image between closed images.
+% Jiang He 2022-6-19
+
+%% Load images and set arguments
+clear all; close all; clc
+Aim = [3]
+Catch = num
+
+
+% Path
+Path_CB = strcat("D:\MRES\Label\Catch",Catch,"\DEF\");
+PCT = niftiread(strcat("D:\MRES\Label\Catch",Catch,"\PCT.nii"));
+Label = niftiread(strcat("D:\MRES\Label\Catch",Catch,"\RLabel.nii"));
+
+
+
+
