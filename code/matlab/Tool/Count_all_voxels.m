@@ -1,8 +1,9 @@
 % calculate number of voxels beyond each threshold
+% 计算每个case 的平均保留像素数
 % He Jiang 2022-6-5
 clear all; clc % close all;
 
-CBCT_index = [24];
+CBCT_index = [33];
 % CBCT_index = [23,24,25,26,28,29,30,31,32];
 % CBCT_index = [3,7,9,11,15,16,19,23,24,25,26,28,29,30,31,32];
 con = [3,7,9,11,15,16];

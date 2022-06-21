@@ -1,4 +1,5 @@
 % Main caiculate mean change
+% 计算图像在不同日期的像素平均值
 
 % clear all;  clc
 clear all; close all; clc
@@ -6,7 +7,7 @@ figure()
 %%
 % ----------------- positive date ----------------
 % case 3
-table = zeros(32,5,2);
+table = zeros(36,5,2);
 table(3,1,1) = 5; table(3,1,2) = 1; % 1 = positive = red circle
 table(7,1,1) = 3; table(3,1,2) = 1; % 1 = positive = red circle
 table(11,1,1) = 12; table(3,1,2) = 1; % 1 = positive = red circle
@@ -19,6 +20,7 @@ table(24,2,1) = 3; table(3,2,2) = 1; % 1 = positive = red circle
 table(24,3,1) = 4; table(3,2,2) = 1; % 1 = positive = red circle
 table(29,1,1) = 1; table(3,2,2) = 2; % 1 = positive = red circle
 table(29,2,1) = 5; table(3,2,2) = 1; % 1 = positive = red circle
+table(33,1,1) = 7; table(3,2,2) = 1;
 scatblue_ind = 0;
 scatred_ind = 0;
 test_blue = 0;
@@ -26,17 +28,21 @@ test_red = 0;
 %%
 % -------------------------------------------------
 
-% CBCT_index = [24,29];
-CBCT_index = [24];
+CBCT_index = [33];
+% CBCT_index = [3,7,9,11,15,16,24,33];
 % CBCT_index = [23,24,25,26,30,31,32];
 
 % CBCT_index = [3,7,9,11,15,16,19];
 sz_ind = size(CBCT_index);
 Value = -650;
-set_value = 0; % use < -650
+set_value = 1; % use < -650
 set_scatter = 1;
 % figure_title = strcat("23-32-Normal ",num2str(Value));
-figure_title = "Deformable-Mean-No-Threshold";
+if set_value == 1
+    figure_title = strcat("Deformable-Mean--",num2str(Value),"-Threshold");
+else
+    figure_title = "Deformable-Mean--no-Threshold";
+end
 filter_size = 5;
 gaussian_sigma = 0.5;
 
@@ -139,5 +145,5 @@ if set_scatter == 1
 end
 title(figure_title)
 xlabel('Time Order')
-ylim([-900,-680])
+% ylim([-900,-550])
 ylabel('Mean HU')

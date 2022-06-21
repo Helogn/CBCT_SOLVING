@@ -2,10 +2,10 @@
 clear all; close all; clc
 %%
 
-Aim_Index = [31,32,33,35,36];
+Aim_Index = [33];
 sz_index = size(Aim_Index);
 Time_of_smooth = 1;
-Judge = 2;
+Judge = 1;
 % parameters of filter kernel
 Length_of_kernel = 20;
 sigma = 10;

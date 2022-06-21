@@ -28,9 +28,15 @@ matrix(Mask1 == 1) = input_image(Mask1 == 1);
 if Judge == 1
     % MIP
     output = squeeze(max(matrix,[],2));
+
 elseif Judge == 2
     % SIP
-    output = squeeze(sum(matrix,2));
+    output = squeeze(mean(matrix,2));
+elseif Judge == 3
+    base = zeros(sz);
+    base(label_image==mx) = input_image(label_image == mx);
+    output = sum(base,2) ./ sum(label_image,2);
+
 end
 
 

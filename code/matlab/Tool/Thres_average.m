@@ -1,10 +1,8 @@
 % test HU threshold for a single file
 % He Jiang 2022-6-5
 clear all;close all;clc
-% CBCT_index = [33];
-vertical_point = -700;
-% CBCT_index = [20,21,22,23,24,25,26,28,29,30,31,32,33,35,36];
-CBCT_index = [3];
+% CBCT_index = [3];
+CBCT_index = [33];
 use_fix = 0;
 con = [2,5];
 % CBCT_index = [3,7,9,15,16];
@@ -66,44 +64,34 @@ for IND = 1 : sz_ind(2)
 
                 MIDD(MIDD<=level) = -3000; 
                 Mean_img = zeros(size(MIDD));
-                Mean_img(MIDD~=3000) = MIDD(MIDD~=3000);
-                mean_curve(curve_ind) = sum(Mean_img,'all')/sum(Mean_img~=-3000,'all');
-                curve(curve_ind) =  sum((MIDD ~= -3000),'all')/Sum_base;
+%                 Mean_img = MIDD;
+                Mean_img(MIDD~=-3000) = MIDD(MIDD~=-3000);
+                mean_curve(curve_ind) = sum(Mean_img,'all')/sum(Mean_img~=0,'all');
+%                 curve(curve_ind) =  sum((MIDD ~= -3000),'all')/Sum_base;
                 curve_ind = curve_ind + 1;
             end
-            sz = size(curve);
+            sz = size(mean_curve);
             figure(1)
             jug_color = size(find(con == (Index_of_CBCT)));
             if use_fix == 1
-                if jug_color ~= 0  
-                    % 有明显变化区域
-                    plot((1:sz(2))*increase,curve,'blue','DisplayName',strcat('Image:',num2str(CBCT_index(IND)),'--Num ',num2str(Ind_of_CB)),'LineWidth',3)
-                    hold on
-                    legend
-                else
-                    plot((1:sz(2))*increase,curve,'red','DisplayName',strcat('Image:',num2str(CBCT_index(IND)),'--Num ',num2str(Ind_of_CB)),'LineWidth',3)
-                    hold on
-                    legend
-                end
+                h = 4;
             else
-                plot(start + ((0:(sz(2)-1))*increase),curve,'DisplayName',strcat('Image:',num2str(CBCT_index(IND)),'--Num ',num2str(Ind_of_CB)),'LineWidth',3)
-%                 plot(start + ((0:(sz(2)-1))*increase),mean_curve,'--','DisplayName',strcat('Image:',num2str(CBCT_index(IND)),'--Num ',num2str(Ind_of_CB)),'LineWidth',3)
+                plot(start + ((0:(sz(2)-1))*increase),mean_curve,'DisplayName',strcat('Image:',num2str(CBCT_index(IND)),'--Num ',num2str(Ind_of_CB)),'LineWidth',3)
 
                 hold on
-                legend
+                legend('Location','northwest')
             end
             Index_of_CBCT = Index_of_CBCT + 1;
         end
 
     end
-    ylim([-0.1,1.1])
+%     ylim([-0.1,1.1])
     title(num2str(ind))
-    hold on
-    plot(ones(1,10)*vertical_point,0.1:0.1:1)
+    hold off
+
 
     f = gcf;
-
-    exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\THreshold\Catch',num2str(ind),'.png'),'Resolution',300)
+    exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\THreshold\Catch_mean',num2str(ind),'.png'),'Resolution',300)
     close all
 end
 
