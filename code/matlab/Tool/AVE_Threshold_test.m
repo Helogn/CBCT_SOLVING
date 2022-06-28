@@ -6,7 +6,7 @@ CBCT_index = [33];
 % CBCT_index = [3,7,9,11,15,16];
 % CBCT_index = [3,7,9,11,15,16,19,23,24,25,26,28,29,30,31,32];
 sz_ind = size(CBCT_index);
-start = -1000; aim = 0; increase = 50;
+start = -1000; aim = 200; increase = 50;
 cal = start : increase: aim;
 sz_cal = size(cal);
 % sz_index = size(CBCT_index);
