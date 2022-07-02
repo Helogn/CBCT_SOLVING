@@ -1,11 +1,13 @@
-% calculate HU threshold for a single file
-% He Jiang 2022-6-5
+% 统计变化的百分比
+% He Jiang 2022-6-30
+clear all; close all; clc;
 
-clear ;close all;clc
 
+%%
+% CBCT_index = [33];
 vertical_point = 100;
-
-% CBCT_index = [8,10,11,12,13,14,18,19,];
+% CBCT_index = [20,21,22,23,2gi4,25,26,28,29,30,31,32,33,35,36];
+% CBCT_index = [8,10,11,12,13,14,18,19];
 CBCT_index = [3];
 use_fix = 0;
 con = [2,5];
@@ -46,7 +48,7 @@ for IND = 1 : sz_ind(2)
 
     for Ind_of_CB = 1:size_of_dir(1)
         
-        ori = 0;
+        ori = 0; 
         curve_ind = 1;
         Ind_File = Dir(Ind_of_CB).name;
         Ind_FilE = reverse(Ind_File);
@@ -62,20 +64,21 @@ for IND = 1 : sz_ind(2)
             
             % extract infor from Label
             MID = A;
-%             MID = squeeze(IMG(Index_of_CBCT,:,:,:));
             MID(Label == 0) = -3000; 
             for level = start  : increase : aim
                 level;
                 if ori == 0
                     Sum_base = sum((MID~=-3000),'all');
                     ori = 1;
+                    old = Sum_base;
                     MIDD = MID;
                 end
 
                 MIDD(MIDD<level) = -3000; 
-
-%                 curve(curve_ind) =  sum((MIDD ~= -3000),'all');
-                curve(curve_ind) =  sum((MIDD ~= -3000),'all')/Sum_base;
+                New = sum((MIDD ~= -3000),'all');
+                curve(curve_ind) = (old-New)/Sum_base;
+                old = New;
+%                 curve(curve_ind) =  sum((MIDD ~= -3000),'all')/Sum_base;
                 curve_ind = curve_ind + 1;
             end
             sz = size(curve);
@@ -102,14 +105,14 @@ for IND = 1 : sz_ind(2)
         end
 
     end
-    ylim([-0.1,1.1])
+%     ylim([-0.1,1.1])
     title(num2str(ind))
     hold on
 %     plot(ones(1,10)*vertical_point,0.1:0.1:1)
-% 
-%     f = gcf;
-%     exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\THreshold\Catch',num2str(ind),'.png'),'Resolution',300)
 
+%     f = gcf;
+% 
+%     exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\THreshold\Catch',num2str(ind),'.png'),'Resolution',300)
 %     close all
 end
 

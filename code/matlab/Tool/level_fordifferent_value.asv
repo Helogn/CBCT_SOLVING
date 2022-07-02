@@ -1,7 +1,7 @@
 % calculate HU threshold for a single file
-% He Jiang 2022-6-5
+% He Jiang 2022-7-2
 
-clear ;close all;clc
+clear all;close all;clc
 
 vertical_point = 100;
 
@@ -18,6 +18,8 @@ Judge = 1;
 % parameters of filter kernel
 Length_of_kernel = 20;
 sigma = 10;
+
+
 
 %% Path Part
 figure()
@@ -114,7 +116,3 @@ for IND = 1 : sz_ind(2)
 end
 
 
-
-%%
-% figure()
-% imagesc(ou2)
