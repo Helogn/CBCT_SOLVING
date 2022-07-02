@@ -6,12 +6,12 @@ clear all;close all;clc
 vertical_point = 100;
 
 % CBCT_index = [8,10,11,12,13,14,18,19,];
-CBCT_index = [24,25,26,28,29,30,31,32,33,35,36];
+CBCT_index = [24];
 use_fix = 0;
 con = [2,5];
 % CBCT_index = [3,7,9,15,16];
 sz_ind = size(CBCT_index);
-start = -1000; aim = 0; increase = 50;
+start = -800; aim = -100; increase = 10;
 % sz_index = size(CBCT_index);
 Time_of_smooth = 0;
 Judge = 1;

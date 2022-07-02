@@ -33,11 +33,17 @@ for k = 1:sz(2)
         
     end
 end
-out(:,1) = 0;
+% out(:,1) = 0;
+
+
 scrsz = get(0,'ScreenSize'); %%%% 获取屏幕的尺寸
 figure1=figure('Position',[0 30 scrsz(3) scrsz(4)-95]);
 for i = 1:sz(1)
-    plot(start + ((0:(sz(2)-1))*increase),out(i,:),'Color',[i/sz(1),0.5,0.5],'DisplayName',strcat('Image: ',num2str(i)),'LineWidth',3);
+%     total = 111/i;
+%     bai = fix(total/100);
+%     shi = fix((total-bai*100)/10)/10;
+%     ge = (total-bai*100-shi*100)/10;
+    plot(start + ((0:(sz(2)-1))*increase),out(i,:),'Color',[i/sz(1),0.5,0.5],'linestyle',':','DisplayName',strcat('Image: ',num2str(i)),'LineWidth',3);
     hold on 
 end
 legend('Location','northwest');
