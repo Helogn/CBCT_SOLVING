@@ -16,7 +16,7 @@ def find_cur(string, path):
     return l
 
 # for i in range (16,23):
-T = [3]
+T = [15]
 a = 0
 if os.path.exists( "Catch_New.bat" ) == True:
     os.remove("Catch_New.bat")
@@ -25,17 +25,13 @@ for i in T:
         Catch_num = '00' + str(i)
     else:
         Catch_num = '0' + str(i) 
-    Path = "D:\MRES\Label\Catch%s\\" % (Catch_num)
-    A = 2 # 1 lncc 2 NMI
-
+    Path = "D:\MRES\Label\Catch_col_%s\\" % (Catch_num)
+    A = 1
     # ---reg_aladin
     if os.path.exists( Path + "DEF" ) == False:
         os.mkdir( Path + "DEF" )
     if os.path.exists( Path + "CPP" ) == False:
         os.mkdir( Path + "CPP" )
-    if os.path.exists( Path + "NMI" ) == False:
-        os.mkdir( Path + "NMI" )
-
 
     Slice = find_cur('nii',Path)
 
@@ -49,12 +45,11 @@ for i in T:
             print(k)
             # if k != 'PCT' and k != 'Label' and k != 'PLabel' and k!= 'bone_label':
             if A == 1: 
-                Path = "reg_f3d -flo D:\MRES\Label\Catch%s\%s.nii -ref D:\MRES\Label\Catch%s\PCT.nii -aff D:\MRES\Label\Catch%s\\txt\C%s.txt  --lncc -5 -vel -cpp D:\MRES\Label\Catch%s\CPP\CPP%s.nii -res D:\MRES\Label\Catch%s\DEF\RES%s.nii -sx -10\n" % (Catch_num,k,Catch_num,Catch_num,k,Catch_num,k,Catch_num,k)
+                # Path = "reg_f3d -flo D:\MRES\Label\Catch_col_%s\%s.nii -ref D:\MRES\Label\Catch_col_%s\PCT.nii -aff D:\MRES\Label\Catch_col_%s\\txt\C%s.txt  --lncc -5 -vel -res D:\MRES\Label\Catch_col_%s\DEF\RES%s.nii -sx -10\n" % (Catch_num,k,Catch_num,Catch_num,k,Catch_num,k,Catch_num,k)
+                Path = "reg_f3d -flo D:\MRES\Label\Catch_col_%s\%s.nii -ref D:\MRES\Label\Catch_col_%s\PCT.nii -aff D:\MRES\Label\Catch_col_%s\\txt\C%s.txt  --nmi -vel -res D:\MRES\Label\Catch_col_%s\DEF\RESNMI%s.nii -sx -10\n" % (Catch_num,k,Catch_num,Catch_num,k,Catch_num,k)
+                
                 f.write(Path)
-            if A == 2: 
 
-                Path = "reg_f3d -flo D:\MRES\Label\Catch%s\%s.nii -ref D:\MRES\Label\Catch%s\PCT.nii -aff D:\MRES\Label\Catch%s\\txt\C%s.txt  --nmi -vel -res D:\MRES\Label\Catch%s\\NMI\RES%s.nii -sx -10\n" % (Catch_num,k,Catch_num,Catch_num,k,Catch_num,k)
-                f.write(Path)
 
 print("final out put = ",a)
 

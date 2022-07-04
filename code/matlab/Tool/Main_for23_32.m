@@ -1,8 +1,8 @@
 % Main script
 clear all; close all; clc
 %%
-
-Aim_Index = [33];
+Aim_Index = 3;
+% Aim_Index = 14:29;
 sz_index = size(Aim_Index);
 Time_of_smooth = 1;
 Judge = 1;
@@ -13,17 +13,17 @@ sigma = 10;
 %% Path Part
 
 for N = 1 : sz_index(2)
+%     if Aim_Index(N) < 10
+%         A = 'Catch00';
+%     else
+%         A = 'Catch0';
+%     end
+
     if Aim_Index(N) < 10
         A = 'Catch00';
     else
         A = 'Catch0';
     end
-
-%         if I < 10
-%             A = 'Catch_col_00';
-%         else
-%             A = 'Catch_col_0';
-%         end
 
     num = strcat(A,num2str(Aim_Index(N)));
     CBCT_Path = strcat('D:\MRES\Label\',num,'\DEF\');
@@ -74,11 +74,11 @@ for N = 1 : sz_index(2)
         figure()
         imagesc(Result)
         colormap('gray')
-        colorbar()
+%         colorbar()
         if Judge == 1
-            title(strcat('MIP: ',num))
+            title(strcat('MIP: Case',num2str(Aim_Index(N))))
         elseif Judge == 2
-            title(strcat('AIP: ',num))
+            title(strcat('AIP: Case',num2str(Aim_Index(N))))
         end
         daspect([1 3 1]);
         view([-90 90])
@@ -90,11 +90,11 @@ for N = 1 : sz_index(2)
         figure()
         imagesc(Image1)
         colormap('gray')
-        colorbar()
+%         colorbar()
         if Judge == 1
-            title(strcat('MIP: ',num))
+            title(strcat('MIP: ',num2str(Aim_Index(N))))
         elseif Judge == 2
-            title(strcat('AIP: ',num))
+            title(strcat('AIP: ',num2str(Aim_Index(N))))
         end
         daspect([1 3 1]);
         view([-90 90])
@@ -102,9 +102,9 @@ for N = 1 : sz_index(2)
 % ------------ save img -----------------------------------
     f = gcf;
     if Judge == 1
-        exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\DEF\TMIP',num,'.png'),'Resolution',300)
+        exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\DEF\MIP',num,'.png'),'Resolution',300)
     elseif Judge ==2
-        exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\DEF\TAIP',num,'.png'),'Resolution',300)
+        exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\DEF\AIP',num,'.png'),'Resolution',300)
     end
 
     close all

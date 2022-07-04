@@ -1,7 +1,7 @@
 clear all
 clc
 % read file from path
-Catch = 'Catch027';
+Catch = 'Catch_col_029';
 Contour_Information_path = strcat('D:\MRES\Label\' , Catch , '\contour.dcm');
 PLAN_nii =strcat('D:\MRES\Label\', Catch, '\PCT.nii');
 % Aim_path = strcat('D:\MRES\Label\', Catch , '\RLabel.nii');
@@ -27,14 +27,16 @@ Y = [-PLAN_info.Transform.T(8)-PLAN_info.Transform.T(6)*sz(2),-PLAN_info.Transfo
 Z = [PLAN_info.Transform.T(12),PLAN_info.Transform.T(12)+PLAN_info.Transform.T(11)*sz(3)];
 
 referenceInfo = imref3d(PLAN_info.ImageSize,X,Y,Z);
-rtMask1 = createMask(rtContours,12, referenceInfo);
-% rtMask2 = createMask(rtContours,17, referenceInfo);
-rtMaskT = createMask(rtContours,38, referenceInfo);
+rtMask1 = createMask(rtContours,13, referenceInfo);
+% rtMask2 = createMask(rtContours,14, referenceInfo);
+rtMaskT = createMask(rtContours,5, referenceInfo);
+% rtMaskonly = createMask(rtContours,16, referenceInfo);
 % % rtMask1 = createMask(rtContours, 10, referenceInfo);
 % rtMask2 = createMask(rtContours,16, referenceInfo);
 % rtMaskT = createMask(rtContours,4, referenceInfo);
 % rtMask = rtMask1  + rtMask2 - rtMaskT;
 rtMask = rtMask1  - rtMaskT;
+% rtMask = rtMaskonly;
 % rtMask = rtMaskT;
 rtMask(rtMask == -1) = 0;
 volshow(rtMask);

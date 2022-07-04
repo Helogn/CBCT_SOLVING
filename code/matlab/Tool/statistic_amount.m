@@ -8,12 +8,12 @@ clear all; close all; clc;
 vertical_point = 100;
 % CBCT_index = [20,21,22,23,2gi4,25,26,28,29,30,31,32,33,35,36];
 % CBCT_index = [8,10,11,12,13,14,18,19];
-CBCT_index = [7];
+CBCT_index = [3];
 use_fix = 0;
 con = [2,5];
 % CBCT_index = [3,7,9,15,16];
 sz_ind = size(CBCT_index);
-start = -1000; aim = -100; increase = 10;
+start = -600; aim = -200; increase = 100;
 % sz_index = size(CBCT_index);
 Time_of_smooth = 0;
 Judge = 1;
@@ -76,8 +76,13 @@ for IND = 1 : sz_ind(2)
 
                 MIDD(MIDD<level) = -3000; 
                 New = sum((MIDD ~= -3000),'all');
-                curve(curve_ind) = (old-New)/Sum_base;
-                old = New;
+                curve(curve_ind) = New;
+%                 curve(curve_ind) = (old-New)/Sum_base;
+%                 old = New;
+
+
+
+
 %                 curve(curve_ind) =  sum((MIDD ~= -3000),'all')/Sum_base;
                 curve_ind = curve_ind + 1;
             end
@@ -96,7 +101,7 @@ for IND = 1 : sz_ind(2)
                     legend
                 end
             else
-                plot(start + ((0:(sz(2)-1))*increase),curve,'linestyle','- -','Color',[Ind_of_CB/size_of_dir(1),0.5,0.5],'DisplayName',strcat('Image:',num2str(CBCT_index(IND)),'--Num ',num2str(Ind_of_CB)),'LineWidth',1.5)
+                plot(start + ((0:(sz(2)-1))*increase),curve,'DisplayName',strcat('Image:',num2str(CBCT_index(IND)),'--Num ',num2str(Ind_of_CB)),'LineWidth',3)
 
                 hold on
                 legend

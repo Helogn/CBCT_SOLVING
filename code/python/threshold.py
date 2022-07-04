@@ -22,8 +22,8 @@ def threshold(image_path,im_path,A):
 
 
 # for i in range (23,32):
-i = 36
-Path = 'D:\MRES\Label\Catch0%s\\' % i
+i = 15
+Path = 'D:\MRES\Label\Catch_col_0%s\\' % i
 # Path = 'D:\MRES\Label\Catch_col_0%s\\' % i
 # image = '20200527.nii'
 

@@ -6,7 +6,7 @@ clc
 % judge mip or sip；
 % Judge = 2;
 
-Aim = [36];
+Aim = 14:29;
 sz1 = size(Aim);
 % smooth for label
 Time_of_smooth = 0;
@@ -15,16 +15,16 @@ for N = 1:sz1(2)
 % for N = 1:1
     for Judge = 1:2
         I = Aim(N)
-        if I < 10
-            A = 'Catch00';
-        else
-            A = 'Catch0';
-        end
 %         if I < 10
-%             A = 'Catch_col_00';
+%             A = 'Catch00';
 %         else
-%             A = 'Catch_col_0';
+%             A = 'Catch0';
 %         end
+        if I < 10
+            A = 'Catch_col_00';
+        else
+            A = 'Catch_col_0';
+        end
         num = strcat(A,num2str(I));
         path = strcat('D:\MRES\Label\',num,'\DEF\');
         Aim_path = strcat('D:\MRES\Label\',num,'\erosion');
@@ -121,9 +121,9 @@ for N = 1:sz1(2)
         f = gcf;
 %         ?Requires R2020a or later
         if Judge == 1
-            exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\MIP\TMIP',num,'.png'),'Resolution',300)
+            exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\DEF\MIP',num,'.png'),'Resolution',300)
         elseif Judge ==2
-            exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\AIP\TAIP',num,'.png'),'Resolution',300)
+            exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\DEF\AIP',num,'.png'),'Resolution',300)
         end
             
         close all
