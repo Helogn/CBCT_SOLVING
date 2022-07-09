@@ -1,7 +1,8 @@
 % Main script
 clear all; close all; clc
 %%
-Aim_Index = 3;
+% Aim_Index = [6,7,9,11,15,16,19,23,24,25,26,28,29,30,31,32,33,8,10,12,13,14,17,18,20,21,22];
+Aim_Index = 35;
 % Aim_Index = 14:29;
 sz_index = size(Aim_Index);
 Time_of_smooth = 1;

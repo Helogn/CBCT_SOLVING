@@ -2,7 +2,7 @@
 % He Jiang 2022-6-5
 clear all; clc % close all;
 
-CBCT_index = [33];
+CBCT_index = [3];
 
 % CBCT_index = [3,7,9,11,15,16];
 % CBCT_index = [3,7,9,11,15,16,19,23,24,25,26,28,29,30,31,32];

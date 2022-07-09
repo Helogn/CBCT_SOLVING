@@ -1,11 +1,11 @@
 % compare voxels between rigid and deforable in CBCT
-clear ;clc;
+clear ;clc;close all;
 
 %%
 
 % CBCT_index = [20,21,22,23,2gi4,25,26,28,29,30,31,32,33,35,36];
 % CBCT_index = [8,10,11,12,13,14,18,19];
-CBCT_index = [3];
+CBCT_index = [3,7,9,15,16];
 
 sz_ind = size(CBCT_index);
 start = -1000; aim = -100; increase = 10;
@@ -14,11 +14,11 @@ Time_of_smooth = 0;
 Judge = 1;
 % parameters of filter kernel
 Length_of_kernel = 20;
-sigma = 2;
-jug3 = 2; % 1 = filter 2 = nonfiler
+sigma = 6;
+jug3 = 1; % 1 = filter 2 = nonfiler
 jug2 = 2; % 1 = mean 2 = var
 %% Path Part
-
+figure()
 for IND = 1 : sz_ind(2)
     
         ind = CBCT_index(IND);
@@ -42,7 +42,7 @@ for IND = 1 : sz_ind(2)
         Dir_C = dir([C_Path_CB + "*.nii"]);
         %   read each file
         size_of_dir = size(Dir);
-        for jug3 = 1:2
+        for jug3 = 1:1
             for Ind_of_CB = 1:size_of_dir(1)
                 
                 ori = 0; 
@@ -100,29 +100,38 @@ for IND = 1 : sz_ind(2)
                         curve_C(Ind_of_CB) = sum(RIGID-PCT,'all')/sum(RIGID ~= -3000,'all');
                         curve_C_DEF(Ind_of_CB) = sum(RIGID-DEF,'all')/sum(RIGID ~= -3000,'all');
                     elseif jug2 == 2
-%                         curve_C(Ind_of_CB) = var(double(RIGID-PCT),0,'all');
-%                         curve_C_DEF(Ind_of_CB) = var(double(RIGID-DEF),0,'all');
-                        result1 = ((RIGID-PCT).*(RIGID-PCT));
-                        curve_C(Ind_of_CB) = sum(result1,'all')/sum(result1~=0,'all');
-                        result2 = ((DEF-PCT).*(DEF-PCT));
-                        curve_C_DEF(Ind_of_CB) = sum(result2,'all')/sum(result2~=0,'all');
+                        curve_C(Ind_of_CB) = var(double(RIGID-PCT),0,'all');
+                        curve_C_DEF(Ind_of_CB) = var(double(RIGID-DEF),0,'all');
+%                         result1 = ((RIGID-PCT).*(RIGID-PCT));
+%                         curve_C(Ind_of_CB) = sum(result1,'all')/sum(result1~=0,'all');
+%                         result2 = ((DEF-PCT).*(DEF-PCT));
+%                         curve_C_DEF(Ind_of_CB) = sum(result2,'all')/sum(result2~=0,'all');
                     end
 
                 end
             end
-            figure()
-            plot(abs(curve),'DisplayName',strcat('DEF-num: ',num2str(ind)));
+%             figure()
+            xlabel("date order")
+            ylabel("Intensity")
+            
+            plot(abs(curve),'DisplayName',strcat('Deforable-Case: ',num2str(ind)),'Color',[1-IND*0.1,0.5,0.5],'LineWidth',3);
             hold on 
-            plot(abs(curve_C),'DisplayName',strcat('C-num: ',num2str(ind)));
+            plot(abs(curve_C),'DisplayName',strcat('Rigid-Case: ',num2str(ind)),'Color',[0.5,0.5,IND*0.1 + 0.1],'LineWidth',3);
+            jug3 = 3;
             if jug3 == 1
                 title('filtered image')
             elseif jug3 == 2
                 title('non filtered image')
+            elseif jug3 == 3
+                title('variance of subtraction between PCT and CBCT')
             end
+            ylim([-100 2000])
+            ylabel('variable of Intensity')
+            xlabel('Date Index')
             hold on 
         %     plot(curve_C_DEF,'DisplayName',strcat('C - DEF-num: ',num2str(ind)));
-            hold off
-            legend()
+%             hold off
+            legend('location','Northeast')
         end
     
 end

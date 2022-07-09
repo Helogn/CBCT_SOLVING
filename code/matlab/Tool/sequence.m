@@ -47,5 +47,8 @@ for i = 1:sz(1)
     hold on 
 end
 legend('Location','northwest');
+xlabel('Intensity range/HU')
+ylabel('Rank of remaining volume')
+
 ylim([-1 sz(1)+1]);
 end

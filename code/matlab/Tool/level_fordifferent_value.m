@@ -6,7 +6,7 @@ clear all;close all;clc
 vertical_point = 100;
 
 % CBCT_index = [8,10,11,12,13,14,18,19,];
-CBCT_index = [3];
+CBCT_index = [33];
 use_fix = 0;
 con = [2,5];
 % CBCT_index = [3,7,9,15,16];
@@ -90,8 +90,8 @@ for IND = 1 : sz_ind(2)
     title(strcat('Num ',num2str(ind)));
 %     plot(ones(1,10)*vertical_point,0.1:0.1:1)
 % 
-%     f = gcf;
-%     exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\order\Catch',num2str(ind),'.png'),'Resolution',300)
+    f = gcf;
+    exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\order\Catch',num2str(ind),'.png'),'Resolution',300)
 %     close all
 
 end

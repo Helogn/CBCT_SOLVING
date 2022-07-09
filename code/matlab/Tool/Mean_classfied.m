@@ -9,18 +9,18 @@ figure()
 % case 3
 table = zeros(36,5,2);
 table(3,1,1) = 5; table(3,1,2) = 1; % 1 = positive = red circle
-table(7,1,1) = 3; table(3,1,2) = 1; % 1 = positive = red circle
-table(11,1,1) = 12; table(3,1,2) = 1; % 1 = positive = red circle
-table(11,2,1) = 13; table(3,2,2) = 1; % 1 = positive = red circle
-table(15,1,1) = 4; table(3,2,2) = 1; % 1 = positive = red circle
-table(16,1,1) = 6; table(3,2,2) = 1; % 1 = positive = red circle
-table(16,2,1) = 8; table(3,2,2) = 2; % 1 = positive = red circle
-table(24,1,1) = 1; table(3,2,2) = 2; % 1 = positive = red circle
-table(24,2,1) = 3; table(3,2,2) = 1; % 1 = positive = red circle
-table(24,3,1) = 4; table(3,2,2) = 1; % 1 = positive = red circle
-table(29,1,1) = 1; table(3,2,2) = 2; % 1 = positive = red circle
-table(29,2,1) = 5; table(3,2,2) = 1; % 1 = positive = red circle
-table(33,1,1) = 7; table(3,2,2) = 1;
+table(7,1,1) = 3; table(7,1,2) = 1; % 1 = positive = red circle
+table(11,1,1) = 12; table(11,1,2) = 1; % 1 = positive = red circle
+table(11,2,1) = 13; table(11,2,2) = 1; % 1 = positive = red circle
+table(15,1,1) = 4; table(15,2,2) = 1; % 1 = positive = red circle
+table(16,1,1) = 6; table(16,1,2) = 1; % 1 = positive = red circle
+table(16,2,1) = 8; table(16,2,2) = 2; % 1 = positive = red circle
+table(24,1,1) = 1; table(24,1,2) = 2; % 1 = positive = red circle
+table(24,2,1) = 3; table(24,2,2) = 1; % 1 = positive = red circle
+table(24,3,1) = 4; table(24,3,2) = 1; % 1 = positive = red circle
+table(29,1,1) = 1; table(29,1,2) = 2; % 1 = positive = red circle
+table(29,2,1) = 5; table(29,2,2) = 1; % 1 = positive = red circle
+table(33,1,1) = 7; table(33,1,2) = 1;
 scatblue_ind = 0;
 scatred_ind = 0;
 test_blue = 0;
@@ -28,13 +28,13 @@ test_red = 0;
 %%
 % -------------------------------------------------
 
-CBCT_index = [33];
-% CBCT_index = [3,7,9,11,15,16,24,33];
+% CBCT_index = [33];
+CBCT_index = [3,7,9,11,15,16,24,33];
 % CBCT_index = [23,24,25,26,30,31,32];
 
 % CBCT_index = [3,7,9,11,15,16,19];
 sz_ind = size(CBCT_index);
-Value = -650;
+Value = -600;
 set_value = 1; % use < -650
 set_scatter = 1;
 % figure_title = strcat("23-32-Normal ",num2str(Value));
@@ -99,7 +99,7 @@ for IND = 1 : sz_ind(2)
 
     end
 
-    plot(AVG_IMG,'DisplayName',num2str(CBCT_index(IND)),'LineWidth',3);
+    plot(AVG_IMG,'DisplayName',num2str(CBCT_index(IND)),'LineWidth',2,'Color',[1-IND / sz_ind(2),0.7,IND / sz_ind(2)]);
     legend
 %     legend(h,num2str(CBCT_index(IND)))
 %     clear h
@@ -109,7 +109,7 @@ for IND = 1 : sz_ind(2)
     if table(CBCT_index(IND),1,1) ~= 0
         for i = 1 : 5
             if table(CBCT_index(IND),i,1) ~= 0
-                if table(CBCT_index(IND),i,2) ~= 1
+                if table(CBCT_index(IND),i,2) == 1
                     scatred_ind = scatred_ind + 1;
                     scat_red(scatred_ind,1) = table(CBCT_index(IND),i,1);
                     scat_red(scatred_ind,2) = AVG_IMG(table(CBCT_index(IND),i,1));
@@ -117,7 +117,7 @@ for IND = 1 : sz_ind(2)
                     test_red = 1;
 
                     
-                elseif table(CBCT_index(IND),i,2) ~= 2
+                elseif table(CBCT_index(IND),i,2) == 2
                     scatblue_ind = scatblue_ind + 1;
                     scat_blue(scatblue_ind,1) = table(CBCT_index(IND),i,1);
                     scat_blue(scatblue_ind,2) = AVG_IMG(table(CBCT_index(IND),i,1));
