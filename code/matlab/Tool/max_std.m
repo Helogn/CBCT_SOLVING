@@ -1,4 +1,4 @@
-% calculate_single file in one sheet
+% calculate_single file max and std
 % hejiang 2022-7-8
 
 % calculate HU threshold for a single file
@@ -7,15 +7,14 @@
 clear ;close all;clc
 
 vertical_point = 100;
-CBCT_index = [3,5:26,28:33,35];
-% % CBCT_index = [3,7,9,11,15,16,24,33];
-% CBCT_index = [3,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,28,29,30,31,32,33,35];
-% CBCT_index = [14:26,29];
+% CBCT_index = [3,7];
+% CBCT_index = [3,7,9,11,15,16,24,33];
+CBCT_index = [14:26,29];
 
 sz_ind = size(CBCT_index);
-start = -1000; aim = -200; increase = 50;
+start = -800; aim = -200; increase = 50;
 % filename = 'CBCT600_500.xlsx';
-filename = strcat('CBCT',num2str(start),num2str(aim),'.xlsx');
+filename = strcat('YColmmCBCT',num2str(start),num2str(aim),'.xlsx');
 if exist(filename) == 2
     delete filename
 end
@@ -39,15 +38,13 @@ for IND = 1 : sz_ind(2)
     else
         Catch = strcat('00',num2str(ind));
     end
-    Path_CB = strcat("D:\MRES\Label\Catch",Catch,"\DEF\");
+    Path_CB = strcat("D:\MRES\Label\Catch_col_",Catch,"\DEF\");
     
     % load PCT
     
-    PCT = niftiread(strcat("D:\MRES\Label\Catch",Catch,"\PCT.nii"));
-    Label = niftiread(strcat("D:\MRES\Label\Catch",Catch,"\RLabel.nii"));
+    PCT = niftiread(strcat("D:\MRES\Label\Catch_col_",Catch,"\PCT.nii"));
+    Label = niftiread(strcat("D:\MRES\Label\Catch_col_",Catch,"\RLabel.nii"));
     size_of_label = size(Label);
-    SE = strel('cube',3);
-    Label = imerode(Label,SE);
     
     
     Dir = dir([Path_CB + "*.nii"]);
@@ -99,10 +96,10 @@ for IND = 1 : sz_ind(2)
 
 
     end
-%     ma = max(mid_arr,[],1);
-%     mi = min(mid_arr,[],1);
-%     mm = (ma-mi)./ma;
-    st = std(mid_arr,1);
+    ma = max(mid_arr,[],1);
+    mi = min(mid_arr,[],1);
+    st = (ma-mi);
+%     st = std(mid_arr,1);
     if IND == 1
         
         writematrix(m,filename,'Sheet',1,'Range',strcat('C',num2str(totol_row)),"AutoFitWidth",false);
@@ -110,9 +107,9 @@ for IND = 1 : sz_ind(2)
     end
     a = {'name',CBCT_index(IND)};
     writecell(a,filename,'Sheet',1,'Range',strcat('A',num2str(totol_row)),"AutoFitWidth",false);
-    totol_row = totol_row + 1;
-    writematrix(mid_arr,filename,'Sheet',1,'Range',strcat('C',num2str(totol_row)),"AutoFitWidth",false);
-    totol_row = totol_row + Ind_of_CB;
+%     totol_row = totol_row + 1;
+%     writematrix(mid_arr,filename,'Sheet',1,'Range',strcat('C',num2str(totol_row)),"AutoFitWidth",false);
+%     totol_row = totol_row + Ind_of_CB;
     writematrix(st,filename,'Sheet',1,'Range',strcat('C',num2str(totol_row)),"AutoFitWidth",false);
     totol_row = totol_row + 1;
     clear  mid_arr a ma mi

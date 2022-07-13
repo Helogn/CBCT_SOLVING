@@ -45,6 +45,9 @@ for IND = 1 : sz_ind(2)
     
     PCT = niftiread(strcat("D:\MRES\Label\Catch",Catch,"\PCT.nii"));
     Label = niftiread(strcat("D:\MRES\Label\Catch",Catch,"\RLabel.nii"));
+
+    SE = strel('cube',3);
+    Label = imerode(Label,SE);
     size_of_label = size(Label);
     
     

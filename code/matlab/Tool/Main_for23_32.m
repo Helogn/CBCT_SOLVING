@@ -1,12 +1,12 @@
 % Main script
 clear all; close all; clc
 %%
-% Aim_Index = [6,7,9,11,15,16,19,23,24,25,26,28,29,30,31,32,33,8,10,12,13,14,17,18,20,21,22];
-Aim_Index = 35;
+Aim_Index = [3,5:26,28:33,35];
+% Aim_Index = 35;
 % Aim_Index = 14:29;
 sz_index = size(Aim_Index);
 Time_of_smooth = 1;
-Judge = 1;
+Judge = 2;
 % parameters of filter kernel
 Length_of_kernel = 20;
 sigma = 10;
@@ -105,7 +105,7 @@ for N = 1 : sz_index(2)
     if Judge == 1
         exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\DEF\MIP',num,'.png'),'Resolution',300)
     elseif Judge ==2
-        exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\DEF\AIP',num,'.png'),'Resolution',300)
+        exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\DEF_AIP\AIP',num,'.png'),'Resolution',300)
     end
 
     close all
