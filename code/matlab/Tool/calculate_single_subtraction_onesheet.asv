@@ -103,20 +103,20 @@ for IND = 1 : sz_ind(2)
         end
 %         mid_arr;
 
-    a = histogram(MID,1000,'BinLimits',[-999,0])
+
     end
 
     
-%     if IND == 1
-%         
-%         writematrix(m,filename,'Sheet',1,'Range',strcat('C',num2str(totol_row)),"AutoFitWidth",false);
-%         totol_row = totol_row + 1;
-%     end
-%     a = {'name',CBCT_index(IND)};
-%     writecell(a,filename,'Sheet',1,'Range',strcat('A',num2str(totol_row)),"AutoFitWidth",false);
-%     totol_row = totol_row + 1;
-%     writematrix(mid_arr2,filename,'Sheet',1,'Range',strcat('C',num2str(totol_row)),"AutoFitWidth",false);
-%     totol_row = totol_row + Ind_of_CB + 1;
+    if IND == 1
+        
+        writematrix(m,filename,'Sheet',1,'Range',strcat('C',num2str(totol_row)),"AutoFitWidth",false);
+        totol_row = totol_row + 1;
+    end
+    a = {'name',CBCT_index(IND)};
+    writecell(a,filename,'Sheet',1,'Range',strcat('A',num2str(totol_row)),"AutoFitWidth",false);
+    totol_row = totol_row + 1;
+    writematrix(mid_arr2,filename,'Sheet',1,'Range',strcat('C',num2str(totol_row)),"AutoFitWidth",false);
+    totol_row = totol_row + Ind_of_CB + 1;
     clear  mid_arr a
 end
 

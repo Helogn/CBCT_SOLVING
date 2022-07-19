@@ -1,12 +1,12 @@
 % Main script
 clear all; close all; clc
 %%
-Aim_Index = [3,5:26,28:33,35];
-% Aim_Index = 35;
+% Aim_Index = [3,5:26,28:33,35];
+Aim_Index = [1,2];
 % Aim_Index = 14:29;
 sz_index = size(Aim_Index);
 Time_of_smooth = 1;
-Judge = 2;
+Judge = 1;
 % parameters of filter kernel
 Length_of_kernel = 20;
 sigma = 10;
@@ -27,7 +27,7 @@ for N = 1 : sz_index(2)
     end
 
     num = strcat(A,num2str(Aim_Index(N)));
-    CBCT_Path = strcat('D:\MRES\Label\',num,'\DEF\');
+    CBCT_Path = strcat('D:\MRES\Label\',num,'\C\');
 %     Aim_path = strcat('D:\MRES\Label\',num,'\erosion');
     Label = niftiread(strcat('D:\MRES\Label\',num,'\RLabel.nii'));
     PCT = Input(strcat('D:\MRES\Label\',num,'\PCT.nii'),Label);

@@ -28,21 +28,22 @@ test_red = 0;
 %%
 % -------------------------------------------------
 
-% CBCT_index = [33];
-CBCT_index = [3,7,9,11,15,16,24,33];
+CBCT_index = [7];
+% CBCT_index = [3,7,9,11,15,16,24,33];
 % CBCT_index = [23,24,25,26,30,31,32];
 
 % CBCT_index = [3,7,9,11,15,16,19];
 sz_ind = size(CBCT_index);
 Value = -600;
-set_value = 1; % use < -650
+set_value = 0; % use < -650
 set_scatter = 1;
 % figure_title = strcat("23-32-Normal ",num2str(Value));
 if set_value == 1
     figure_title = strcat("Deformable-Mean--",num2str(Value),"-Threshold");
 else
     figure_title = "Deformable-Mean--no-Threshold";
-end
+end 
+figure_title = "Average Intensity Curve";
 filter_size = 5;
 gaussian_sigma = 0.5;
 
@@ -100,6 +101,8 @@ for IND = 1 : sz_ind(2)
     end
 
     plot(AVG_IMG,'DisplayName',num2str(CBCT_index(IND)),'LineWidth',2,'Color',[1-IND / sz_ind(2),0.7,IND / sz_ind(2)]);
+    hold on;
+    scatter(1:Ind_of_CB,AVG_IMG,'black','filled');    
     legend
 %     legend(h,num2str(CBCT_index(IND)))
 %     clear h
@@ -144,6 +147,6 @@ if set_scatter == 1
     end
 end
 title(figure_title)
-xlabel('Time Order')
+xlabel('Date Order')
 % ylim([-900,-550])
-ylabel('Mean HU')
+ylabel('Average Intensity/HU')
