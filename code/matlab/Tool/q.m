@@ -6,13 +6,13 @@
 
 clear ;close all;clc
 N = 100;
-N1 = -1000;
+N1 = -900;
 N2 = 0;
 vertical_point = 100;
 % CBCT_index = [3,5:26,28:33,35];
 % CBCT_index = [3,7,9,11,15,16,24,33];
 % CBCT_index = [3,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,28,29,30,31,32,33,35];
-CBCT_index = [21];
+CBCT_index = [3];
 
 sz_ind = size(CBCT_index);
 start = -1000; aim = -200; increase = 30;
@@ -113,8 +113,8 @@ for IND = 1 : sz_ind(2)
     plot( linspace(N1,N2,N),his(Ind_of_CB,:),'DisplayName',Ind_File(4:11),'Linewidth',2,'Color',[Ind_of_CB/size_of_dir(1),0.5,0.5])
 %     legend(strcat('Case ',num2str(Ind_of_CB)))
     legend()
-    title(strcat('Catch ',num2str(ind),'  Histogram nbin = ',num2str(N)))
-    xlabel('Threshold/HU')
+    title(strcat('Catch ',num2str(ind),'  Distribution nbin = ',num2str(N)))
+    xlabel('Intensity/HU')
     ylabel('Number')
     hold on 
 %     figure(3)
@@ -144,10 +144,10 @@ for IND = 1 : sz_ind(2)
 %     totol_row = totol_row + Ind_of_CB;
 %     writematrix(st,filename,'Sheet',1,'Range',strcat('C',num2str(totol_row)),"AutoFitWidth",false);
 %     totol_row = totol_row + 1;
-    f = gcf;
+%     f = gcf;
 % 
-    exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\histogram1\Catch',num2str(ind),'nbin=',num2str(N),'range ',num2str(N1),'-',num2str(N2),'.png'),'Resolution',300)
-    close all
+%     exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\histogram1\Catch',num2str(ind),'nbin=',num2str(N),'range ',num2str(N1),'-',num2str(N2),'.png'),'Resolution',300)
+%     close all
     clear  mid_arr a ma mi
 end
 

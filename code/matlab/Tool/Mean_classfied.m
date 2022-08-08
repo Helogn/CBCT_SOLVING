@@ -28,7 +28,7 @@ test_red = 0;
 %%
 % -------------------------------------------------
 
-CBCT_index = [7];
+CBCT_index = [11];
 % CBCT_index = [3,7,9,11,15,16,24,33];
 % CBCT_index = [23,24,25,26,30,31,32];
 
@@ -100,9 +100,9 @@ for IND = 1 : sz_ind(2)
 
     end
 
-    plot(AVG_IMG,'DisplayName',num2str(CBCT_index(IND)),'LineWidth',2,'Color',[1-IND / sz_ind(2),0.7,IND / sz_ind(2)]);
+    plot(AVG_IMG,'DisplayName',strcat("Case ",num2str(CBCT_index(IND))),'LineWidth',2,'Color',[1-IND / sz_ind(2),0.7,IND / sz_ind(2)]);
     hold on;
-    scatter(1:Ind_of_CB,AVG_IMG,'black','filled');    
+%     scatter(1:Ind_of_CB,AVG_IMG,'black','filled');    
     legend
 %     legend(h,num2str(CBCT_index(IND)))
 %     clear h

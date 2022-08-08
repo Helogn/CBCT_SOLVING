@@ -1,4 +1,7 @@
 % He Jiang
+% MIP judge = 1
+% global AIP judge = 2
+% adaptive AIP judge = 3
 function output = MIP(input_image, label_image,t,Judge,X)
 if (nargin<5)
     X = -1000;
@@ -30,12 +33,14 @@ if Judge == 1
     output = squeeze(max(matrix,[],2));
 
 elseif Judge == 2
-    % SIP
+    
     output = squeeze(mean(matrix,2));
 elseif Judge == 3
-    base = zeros(sz);
+    % SIP
+    base = zeros(sz) ;
     base(label_image==mx) = input_image(label_image == mx);
-    output = sum(base,2) ./ sum(label_image,2);
+    output = sum(base,2) ./ (sum(label_image,2)+1) ;
+    output(output == 0) = -1000;
 
 end
 

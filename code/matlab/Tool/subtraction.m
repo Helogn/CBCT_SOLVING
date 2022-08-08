@@ -37,15 +37,19 @@ for i = 1: sz_of_list(1)
 end
 
 %% subtraction part
-Subtraction = zeros(sz_of_list(1)-1,sz(1),sz(3));
+clear Subtraction
+% Subtraction = zeros(sz_of_list(1)-1,sz(1),sz(3));
+x = 0;y=0;jugg=1;
 for i = 1: sz_of_list(1)-1
 
-    Subtraction(i,:,:) = MIP(squeeze(Scan(i,:,:,:) - Scan(i + 1,:,:,:)),Label,Time_smooth,3);
-
+%     Subtraction(i,:,:) = MIP(squeeze(Scan(i+1,:,:,:) - Scan(i,:,:,:)),Label,Time_smooth,1);
+%     Subtraction(i,:,:)
+    [Subtraction(i,:,:),x,y,jugg] = cut(MIP(squeeze(Scan(i+1,:,:,:) - Scan(i,:,:,:)),Label,Time_smooth,3),x,y,jugg);
+%     eval(['[MIP',num2str(i),',x,y,jugg] = cut(MIP',num2str(i),',x,y,jugg);']);
 end
-%% imagesc 
+% %% images
 % ------------------- Plot Part ---------------------------------
-Judge = 2;
+Judge = 1;
 if mod(sz_of_list(1)-1,2) == 0
     % if number of CBCT is even
     loop = (sz_of_list(1)-1) / 2;
@@ -58,6 +62,7 @@ else
 %     eval(['Image2 = MIP',num2str(loop+1),';']);
     if Judge == 2
         Subtraction(loop*2,:,:) = zeros([sz(1),sz(3)]) + Subtraction(1,1);
+        [Subtraction(loop*2,:,:),x,y,jugg] = cut(Subtraction(loop*2,:,:),x,y,jugg);
 %         eval(['MIP',num2str(loop*2),' = zeros([sz(1),sz(3)]) + Subtraction(1,1);']);
     elseif Judge == 1
         eval(['MIP',num2str(loop*2),' = zeros([sz(1),sz(3)]) -1000;']);
@@ -73,9 +78,12 @@ if sz_of_list(1) >= 6
 %         eval(['Image2 = cat(1,Image2,','MIP',num2str(i+loop),');'])
     end
     Result = cat(2,Image2,Image1);
+    Result = classify(Result,20);
     figure()
     imagesc(Result)
     colormap('gray')
+    
+
     colorbar()
     if Judge == 1
         title(strcat('MIP: ',ind))
@@ -84,6 +92,8 @@ if sz_of_list(1) >= 6
     end
     daspect([1 3 1]);
     view([-90 90])
+%     clim([-200 200])
+a = 1
 else
     for i = 2:1:sz_of_list(1)
 %         eval(['Image1 = cat(1,Image1,','MIP',num2str(i),');'])
@@ -103,6 +113,5 @@ else
     view([-90 90])
     
 end
-
 
 

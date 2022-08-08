@@ -1,11 +1,12 @@
-function out = classify(input)
+function out = classify(input,num)
 % classify whole image into 5 classes
-input = abs(input);
+mx = max(input,[],"all");
+mi = min(input,[],"all");
+range = (mx - mi) / num;
 out = input;
-out(input <= 1000) = 5;
-out(input < 800) = 4;
-out(input < 600) = 3;
-out(input < 400) = 2;
-out(input < 200) = 0;
-
+for i = 0 : num
+    stage = mx - i*range;
+    out(input <= stage) = num - i;
+    
+end
 end

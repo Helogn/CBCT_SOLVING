@@ -1,16 +1,17 @@
 % Main script
 clear all; close all; clc
 %%
-% Aim_Index = [3,5:26,28:33,35];
-Aim_Index = [1,2];
+Aim_Index = [3,5:26,28:33,35];
+
+Aim_Index = [3];
 % Aim_Index = 14:29;
 sz_index = size(Aim_Index);
-Time_of_smooth = 1;
-Judge = 1;
+Time_of_smooth = 3;
+Judge = 3;
 % parameters of filter kernel
 Length_of_kernel = 20;
 sigma = 10;
-
+jugg = 1;x = 0;y = 0;
 %% Path Part
 
 for N = 1 : sz_index(2)
@@ -27,7 +28,7 @@ for N = 1 : sz_index(2)
     end
 
     num = strcat(A,num2str(Aim_Index(N)));
-    CBCT_Path = strcat('D:\MRES\Label\',num,'\C\');
+    CBCT_Path = strcat('D:\MRES\Label\',num,'\DEF\');
 %     Aim_path = strcat('D:\MRES\Label\',num,'\erosion');
     Label = niftiread(strcat('D:\MRES\Label\',num,'\RLabel.nii'));
     PCT = Input(strcat('D:\MRES\Label\',num,'\PCT.nii'),Label);
@@ -42,6 +43,7 @@ for N = 1 : sz_index(2)
         eval(['Scan',num2str(i),'= APfilter(Scan',num2str(i),',Length_of_kernel,sigma);'])
         eval(['Scan',num2str(i),'(B == -1000) = -1000;'])
         eval(['MIP',num2str(i),'=','MIP(Scan',num2str(i),',Label,Time_of_smooth,Judge);']);
+        eval(['[MIP',num2str(i),',x,y,jugg] = cut(MIP',num2str(i),',x,y,jugg);']);
         clear B
     end
 % ------------------- MIP have been added to above part ---------
@@ -60,8 +62,13 @@ for N = 1 : sz_index(2)
         eval(['Image2 = MIP',num2str(loop+1),';']);
         if Judge == 2
             eval(['MIP',num2str(loop*2),' = zeros([sz(1),sz(3)]) + MIP1(1,1);']);
+            eval(['[MIP',num2str(loop*2),',x,y,jugg] = cut(MIP',num2str(loop*2),',x,y,jugg);']);
         elseif Judge == 1
             eval(['MIP',num2str(loop*2),' = zeros([sz(1),sz(3)]) -1000;']);
+            eval(['[MIP',num2str(loop*2),',x,y,jugg] = cut(MIP',num2str(loop*2),',x,y,jugg);']);
+        elseif Judge == 3
+            eval(['MIP',num2str(loop*2),' = zeros([sz(1),sz(3)]) -1000;']);
+            eval(['[MIP',num2str(loop*2),',x,y,jugg] = cut(MIP',num2str(loop*2),',x,y,jugg);']);
         end
     end
     Image1 = MIP1;
@@ -75,10 +82,12 @@ for N = 1 : sz_index(2)
         figure()
         imagesc(Result)
         colormap('gray')
-%         colorbar()
+        colorbar()
         if Judge == 1
             title(strcat('MIP: Case',num2str(Aim_Index(N))))
         elseif Judge == 2
+            title(strcat('AIP: Case',num2str(Aim_Index(N))))
+                    elseif Judge == 3
             title(strcat('AIP: Case',num2str(Aim_Index(N))))
         end
         daspect([1 3 1]);
@@ -91,25 +100,31 @@ for N = 1 : sz_index(2)
         figure()
         imagesc(Image1)
         colormap('gray')
-%         colorbar()
+        colorbar()
         if Judge == 1
             title(strcat('MIP: ',num2str(Aim_Index(N))))
         elseif Judge == 2
+            title(strcat('AIP: ',num2str(Aim_Index(N))))
+        elseif Judge == 3
             title(strcat('AIP: ',num2str(Aim_Index(N))))
         end
         daspect([1 3 1]);
         view([-90 90])
     end
 % ------------ save img -----------------------------------
-    f = gcf;
-    if Judge == 1
-        exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\DEF\MIP',num,'.png'),'Resolution',300)
-    elseif Judge ==2
-        exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\DEF_AIP\AIP',num,'.png'),'Resolution',300)
-    end
-
-    close all
-    clear loop
+%     f = gcf;
+%     if Judge == 1
+%         exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\DEF\MIP',num,'.png'),'Resolution',300)
+%     elseif Judge ==2
+%         exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\DEF_AIP\AIP',num,'.png'),'Resolution',300)
+%     elseif Judge ==3
+%         exportgraphics(f,strcat('D:\github_repsitory\CBCT_SOLVING\code\matlab\png\DEF_AIP\AIP',num,'.png'),'Resolution',400)
+%    
+% 
+%     end
+% 
+%     close all
+%     clear loop
 
 end
 
